@@ -23,11 +23,11 @@ Mnemonic Mastery: Utilizing memory athlete principles, chunking, and memory pala
 
 📂 Featured Systems
 
-Adaptive-Concurrency-Orchestrator: [Adaptive-Concurrency-Orchestrator](https://github.com/Drecoder/Adaptive-Concurrency-Orchestrator): A Node.js Proof of Work (PoW) acting as an infrastructure shield for Headless WordPress/Next.js stacks using Gradient-Based Orchestration.
+[Adaptive-Concurrency-Orchestrator](https://github.com/Drecoder/Adaptive-Concurrency-Orchestrator): A Node.js Proof of Work (PoW) acting as an infrastructure shield for Headless WordPress/Next.js stacks using Gradient-Based Orchestration.
 
-Engineering_Excellence_Playbook: [Engineering_Excellence_Playbook](https://github.com/Drecoder/Engineering_Excellence_Playbook) A consultant-first framework codifying repeatable standards for platform governance, observability, and async flows.
+[Engineering_Excellence_Playbook](https://github.com/Drecoder/Engineering_Excellence_Playbook) A consultant-first framework codifying repeatable standards for platform governance, observability, and async flows.
 
-cyber: [cyber](https://github.com/Drecoder/cyber) A multi-service fullstack demonstration integrated with a robust observability stack featuring OpenTelemetry, Prometheus, and Grafana.
+[cyber](https://github.com/Drecoder/cyber) A multi-service fullstack demonstration integrated with a robust observability stack featuring OpenTelemetry, Prometheus, and Grafana.
 
 ⚖️ Strategic Competitive Edge
 I value Observability-First design: I see the pattern where code is only "production-ready" once it provides clear signals. By integrating OpenTelemetry and Prometheus metrics, I ensure systems are observable and traceable from day one.
