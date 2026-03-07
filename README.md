@@ -36,12 +36,29 @@ I apply memory athlete techniques—chunking, memory palaces, and spatial recall
 
 ## 📂 Featured Systems
 
-| Project | Description | Stack |
-|---------|-------------|-------|
-| **[Adaptive-Concurrency-Orchestrator](https://github.com/Drecoder/Adaptive-Concurrency-Orchestrator)** | Infrastructure shield for Headless WordPress/Next.js using gradient-based orchestration and Proof-of-Work challenge validation | Node.js · Redis · Nginx |
-| **[data-net-vpc](https://github.com/Drecoder/data-net-vpc)** | Observability-focused networking project demonstrating advanced VPC architecture in GCP with automated CI/CD pipelines and Checkov security scans for security-first posture | HCL · Terraform · GCP · Checkov |
-| **[Engineering_Excellence_Playbook](https://github.com/Drecoder/Engineering_Excellence_Playbook)** | Consultant-ready framework codifying platform governance, observability standards, and async flow patterns | Markdown · ADRs · GitHub Actions |
-| **[cyber](https://github.com/Drecoder/cyber)** | Multi-service fullstack demonstration with integrated observability | OpenTelemetry · Prometheus · Grafana · Go · React |
+### [sovereign-vpc](https://github.com/Drecoder/sovereign-vpc)
+WIP — A Google Cloud Platform (GCP) networking foundation built with HCL (Terraform) that implements Zero-Trust principles and Sovereignty-as-Code. It features modular VPC architecture with Hub-and-Spoke peering and automated compliance controls.  
+`HCL` · `Terraform` · `GCP` · `Zero-Trust`
+
+### [data-net-vpc](https://github.com/Drecoder/data-net-vpc)
+An observability-focused networking project demonstrating advanced VPC architecture in GCP. It integrates automated CI/CD pipelines with Checkov security scans to maintain a security-first posture.  
+`HCL` · `Terraform` · `GCP` · `Checkov` · `CI/CD`
+
+### [Adaptive-Concurrency-Orchestrator](https://github.com/Drecoder/Adaptive-Concurrency-Orchestrator)
+A Node.js-based Proof of Work (PoW) for an adaptive concurrency controller that functions as an infrastructure shield for Headless WordPress & Next.js stacks. It utilizes Gradient-Based Orchestration for intelligent traffic management.  
+`Node.js` · `Redis` · `Nginx` · `JavaScript`
+
+### [HOTEL](https://github.com/Drecoder/HOTEL)
+An event-driven Hotel Operations (HotelOps) platform utilizing a NestJS + GraphQL backend and a React (Vite) frontend. It features a scalable microservices-ready architecture using Kafka for message brokering and event streaming.  
+`NestJS` · `GraphQL` · `React` · `Kafka` · `TypeScript`
+
+### [cyber](https://github.com/Drecoder/cyber)
+A multi-service fullstack demonstration showcasing a Go backend and React frontend integrated with a robust observability stack. It features Prometheus, Grafana, and OpenTelemetry for advanced metrics collection and distributed tracing.  
+`Go` · `React` · `OpenTelemetry` · `Prometheus` · `Grafana`
+
+### [Engineering_Excellence_Playbook](https://github.com/Drecoder/Engineering_Excellence_Playbook)
+A comprehensive Consultant-First Engineering Playbook and operational framework. It codifies repeatable standards for Frontend, Backend, and Infrastructure with a focus on Async Flows, Observability, and Platform Governance.  
+`Markdown` · `ADRs` · `GitHub Actions` · `Documentation`
 
 ---
 
