@@ -39,6 +39,7 @@ I apply memory athlete techniques—chunking, memory palaces, and spatial recall
 | Project | Description | Stack |
 |---------|-------------|-------|
 | **[Adaptive-Concurrency-Orchestrator](https://github.com/Drecoder/Adaptive-Concurrency-Orchestrator)** | Infrastructure shield for Headless WordPress/Next.js using gradient-based orchestration and Proof-of-Work challenge validation | Node.js · Redis · Nginx |
+| **[data-net-vpc](https://github.com/Drecoder/data-net-vpc)** | Observability-focused networking project demonstrating advanced VPC architecture in GCP with automated CI/CD pipelines and Checkov security scans for security-first posture | HCL · Terraform · GCP · Checkov |
 | **[Engineering_Excellence_Playbook](https://github.com/Drecoder/Engineering_Excellence_Playbook)** | Consultant-ready framework codifying platform governance, observability standards, and async flow patterns | Markdown · ADRs · GitHub Actions |
 | **[cyber](https://github.com/Drecoder/cyber)** | Multi-service fullstack demonstration with integrated observability | OpenTelemetry · Prometheus · Grafana · Go · React |
 
