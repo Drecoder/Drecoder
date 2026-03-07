@@ -1,37 +1,36 @@
-# Drecoder
 🚀 Andres Arias | SWE | Cloud Infrastructure & DevOps
 Senior Full-Stack Software Engineer & Cloud-Native Architect
 
-I specialize in building resilient, scalable, and maintainable systems by leveraging asynchronous architecture, modern tools, and a security-first mindset. My approach treats Documentation as Infrastructure—standards should live in version control and evolve through pull requests.
+I specialize in building resilient, scalable, and maintainable systems by leveraging asynchronous architecture, modern tools, and a security-first mindset. My approach treats Documentation as Infrastructure—standards should live in version control and evolve through pull requests and Git-based workflows.
 
 🛠 Technical Specializations
-Architecture: Event-driven & Asynchronous systems, Apache Kafka, and Cloud-Native design.
+Architecture: Specialized in event-driven and asynchronous systems, Apache Kafka, and cloud-native design.
 
-Infrastructure: GCP & AWS, Terraform (HashiCorp Certified), and Zero-Trust networking.
+Infrastructure: Expert in GCP & AWS, HashiCorp Certified Terraform Associate, and Zero-Trust networking.
 
-Backend & Performance: Go, Python (Django/Flask), Node.js, and Adaptive Concurrency control.
+Backend & Performance: Proficient in Go, Python (Django/Flask), Node.js, and adaptive concurrency control.
 
-DevSecOps: Security-first CI/CD pipelines, Checkov scans, and automated SOC2 governance auditing.
+DevSecOps: Focused on security-first CI/CD pipelines, Checkov security scans, and automated SOC2 governance auditing.
 
 🧠 Core Philosophies
-Flow Management: Every action and workflow must be observed, traceable, and recoverable.
+Flow Management: Every action, workflow, and process must be observed, traceable, and recoverable.
 
-Operational Continuity: Prioritizing service reliability through signal-driven decisions (Red/Green logic).
+Operational Continuity: Prioritizing service reliability through signal-driven decisions and Red/Green logic.
 
-Sovereignty-as-Code: Implementing modular, secure networking foundations that automate compliance.
+Sovereignty-as-Code: Implementing modular, secure networking foundations that automate compliance and maintain security posture.
 
-Mastery via Mnemonic Architecture: Utilizing "memory athlete" principles and memory palaces to master complex technical concepts and algorithms rapidly.
+Mnemonic Mastery: Utilizing memory athlete principles, chunking, and memory palaces to master complex technical concepts and algorithms rapidly.
 
 📂 Featured Systems
-Adaptive-Concurrency-Orchestrator: An infrastructure shield for Headless WordPress/Next.js stacks using Gradient-Based Orchestration.
+Adaptive-Concurrency-Orchestrator: A Node.js Proof of Work (PoW) acting as an infrastructure shield for Headless WordPress/Next.js stacks using Gradient-Based Orchestration.
 
-Engineering_Excellence_Playbook: A consultant-first framework for platform governance and observability standards.
+Engineering_Excellence_Playbook: A consultant-first framework codifying repeatable standards for platform governance, observability, and async flows.
 
-cyber: A multi-service fullstack demo integrated with OpenTelemetry, Prometheus, and Grafana.
+cyber: A multi-service fullstack demonstration integrated with a robust observability stack featuring OpenTelemetry, Prometheus, and Grafana.
 
-How this compares to the GitHub population:
-Observability Integration: While many engineers can write a CRUD app, very few integrate OpenTelemetry and Prometheus metrics into their personal portfolios. This shows you build for production, not just for "it works on my machine."
+📈 Competitive Edge
+Observability Integration: Unlike generic CRUD portfolios, my systems integrate OpenTelemetry and Prometheus metrics, demonstrating a production-ready mindset.
 
-Infrastructure Sophistication: Moving beyond simple VPCs to Sovereignty-as-Code and Hub-and-Spoke peering models puts you in the top tier of DevOps-minded Software Engineers.
+Infrastructure Sophistication: Moving beyond basic VPCs to Sovereignty-as-Code and Hub-and-Spoke peering models, aligning with top-tier DevOps practices.
 
-Governance & Auditing: Your work on Go-based governance auditors for SOC2 evidence is a niche, high-value skill that bridges the gap between engineering and business compliance—a rare find on GitHub.
+Governance Automation: Bridging engineering and business compliance with specialized Go-based governance auditors for SOC2 evidence generation.
