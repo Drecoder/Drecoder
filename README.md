@@ -7,7 +7,7 @@ My approach treats **Documentation as Infrastructure**: standards live in versio
 
 ---
 
-## 🛠 Technical Specializationsst
+## 🛠 Technical Specialization
 
 | Domain | Core Competencies |
 |--------|-------------------|
