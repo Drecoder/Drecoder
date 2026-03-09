@@ -17,6 +17,35 @@ My approach treats **Documentation as Infrastructure**: standards live in versio
 | **DevSecOps** | Security-first CI/CD · Checkov · Automated SOC2 governance · Compliance-as-Code |
 
 ---
+## 🚀 Currently Working On
+
+### **[Adaptive Concurrency Orchestrator](https://github.com/Drecoder/Adaptive-Concurrency-Orchestrator)**
+I am architecting a high-throughput system designed to mitigate the **"Thundering Herd"** problem and resource exhaustion in distributed environments. This project implements a **Closed-Loop Control System** (relying on TCP-style congestion control) to dynamically throttle workloads based on real-time telemetry.
+
+#### **System Architecture**
+The orchestrator treats concurrency as a dynamic variable, adjusting the admission gate based on a continuous feedback loop of system health and execution latency.
+
+```mermaid
+graph LR
+    subgraph "Ingress Layer"
+        A[Workload Queue] --> B{Admission Controller}
+    end
+
+    subgraph "Adaptive Control Loop"
+        B --> C[Worker Pool]
+        C --> D[Execution Latency / Success Rate]
+        D --> E[Congestion Controller]
+        F[Prometheus / System Metrics] --> E
+        E -->|Dynamic Concurrency Limit| B
+    end
+
+    subgraph "Sinks"
+        C --> G[External APIs / DB]
+    end
+
+    style E fill:#2a60ff,stroke:#fff,stroke-width:2px,color:#fff
+    style B fill:#f96,stroke:#333,stroke-width:2px
+
 
 ## 🧠 Engineering Philosophy
 
