@@ -19,19 +19,102 @@ My approach treats **Documentation as Infrastructure**: standards live in versio
 ---
 ## 🚀 Currently Working On
 
-### **[Adaptive Concurrency Orchestrator](https://github.com/Drecoder/Adaptive-Concurrency-Orchestrator)**
-I am architecting a high-throughput system designed to mitigate the **"Thundering Herd"** problem and resource exhaustion in distributed environments. This project implements a **Closed-Loop Control System** (relying on TCP-style congestion control) to dynamically throttle workloads based on real-time telemetry
+### **[spoke-tool](https://github.com/Drecoder/spoke-tool)**
+
+I am developing a local AI orchestration engine designed to automate the **Documentation as Infrastructure** lifecycle. It utilizes a Hub-and-Spoke architecture to ingest multi-language source code (Go, Python, Node.js) and generate high-fidelity unit tests and technical READMEs using local SLMs (Small Language Models).
 
 #### **System Architecture**
+
+The tool operates as a sovereign dispatcher, routing code through specialized spokes (Test & Readme) and an SLM pool (CodeBERT, Gemma, DeepSeek) to produce verified, audited output without data leakage.
+
+```mermaid
+graph TD
+    %% Top Level
+    FS[("File System")]
+    Git[("Git Repository")]
+    
+    %% Hub
+    subgraph Hub[Orchestrator Hub]
+        D[Dispatcher]
+        M[Monitor]
+        Q[Queue]
+        A[Audit]
+        S[Squeeze]
+    end
+    
+    %% Spokes
+    subgraph Test[Test Spoke]
+        TA[Analyzer]
+        TG[Generator]
+        TR[Runner]
+        TI[Interpreter]
+    end
+    
+    subgraph Readme[Readme Spoke]
+        RE[Extractor]
+        RS[Summarizer]
+        RF[Formatter]
+        RM[Merger]
+    end
+    
+    %% SLM
+    subgraph SLM[SLM Pool]
+        CB[CodeBERT]
+        G[Gemma 2B]
+        DS[DeepSeek 7B]
+        O[Ollama]
+    end
+    
+    %% Connections
+    FS --> D
+    Git --> D
+    D --> Q
+    Q --> Test
+    Q --> Readme
+    
+    TA --> CB
+    TG --> DS
+    TI --> DS
+    
+    RE --> CB
+    RS --> G
+    RS --> CB
+    
+    TR --> FS
+    RM --> FS
+    RM --> Git
+    TI --> A
+    
+    classDef hub fill:#ff9f1c,stroke:#333,stroke-width:2px,color:#333
+    classDef test fill:#2ec4b6,stroke:#333,stroke-width:2px,color:#333
+    classDef doc fill:#e71d36,stroke:#333,stroke-width:2px,color:#fff
+    classDef slm fill:#8338ec,stroke:#333,stroke-width:2px,color:#fff
+    classDef external fill:#adb5bd,stroke:#333,stroke-width:2px,color:#333
+    
+    class D,M,Q,A,S hub
+    class TA,TG,TR,TI test
+    class RE,RS,RF,RM doc
+    class CB,G,DS,O slm
+    class FS,Git external
+```
+
+---
+
+### **[Adaptive Concurrency Orchestrator](https://github.com/Drecoder/Adaptive-Concurrency-Orchestrator)**
+
+I am architecting a high-throughput system to mitigate the "Thundering Herd" problem and resource exhaustion in distributed environments. This project implements a **Closed-Loop Control System** (relying on TCP-style congestion control) to throttle workloads based on real-time telemetry dynamically.
+
+#### **System Architecture**
+
 The orchestrator treats concurrency as a dynamic variable, adjusting the admission gate based on a continuous feedback loop of system health and execution latency.
 
 ```mermaid
 graph LR
-    subgraph "Ingress Layer."
+    subgraph "Ingress Layer"
         A[Workload Queue] --> B{Admission Controller}
     end
 
-    subgraph "Adaptive Control Loop."
+    subgraph "Adaptive Control Loop"
         B --> C[Worker Pool]
         C --> D[Execution Latency / Success Rate]
         D --> E[Congestion Controller]
@@ -45,6 +128,7 @@ graph LR
 
     style E fill:#2a60ff,stroke:#fff,stroke-width:2px,color:#fff
     style B fill:#f96,stroke:#333,stroke-width:2px
+```
 ```
 ## 🧠 Engineering Philosophy
 
