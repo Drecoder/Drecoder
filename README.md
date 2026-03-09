@@ -129,7 +129,8 @@ graph LR
     style E fill:#2a60ff,stroke:#fff,stroke-width:2px,color:#fff
     style B fill:#f96,stroke:#333,stroke-width:2px
 ```
-```
+---
+
 ## 🧠 Engineering Philosophy
 
 **Flow Management**  
