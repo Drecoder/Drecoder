@@ -27,11 +27,11 @@ The orchestrator treats concurrency as a dynamic variable, adjusting the admissi
 
 ```mermaid
 graph LR
-    subgraph "Ingress Layer"
+    subgraph "Ingress Layer."
         A[Workload Queue] --> B{Admission Controller}
     end
 
-    subgraph "Adaptive Control Loop"
+    subgraph "Adaptive Control Loop."
         B --> C[Worker Pool]
         C --> D[Execution Latency / Success Rate]
         D --> E[Congestion Controller]
@@ -45,8 +45,6 @@ graph LR
 
     style E fill:#2a60ff,stroke:#fff,stroke-width:2px,color:#fff
     style B fill:#f96,stroke:#333,stroke-width:2px
-
-
 ## 🧠 Engineering Philosophy
 
 **Flow Management**  
