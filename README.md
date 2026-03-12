@@ -59,9 +59,9 @@ graph TD
     
     %% SLM
     subgraph SLM[SLM Pool]
-        CB[CodeBERT]
+        CL[CodeLLama]
         G[Gemma 2B]
-        DS[DeepSeek 7B]
+        CL[CodeLLama]
         O[Ollama]
     end
     
@@ -72,13 +72,13 @@ graph TD
     Q --> Test
     Q --> Readme
     
-    TA --> CB
+    TA --> CL
     TG --> DS
     TI --> DS
     
-    RE --> CB
+    RE --> CL
     RS --> G
-    RS --> CB
+    RS --> CL
     
     TR --> FS
     RM --> FS
