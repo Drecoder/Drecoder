@@ -1,7 +1,7 @@
 # 🚀 Andres Arias | SWE · Cloud Infrastructure · DevOps
 ### Senior Full-Stack Software Engineer & Cloud-Native Architect
 
-I architect **resilient, observable systems** where every transaction is traceable, every failure is recoverable, and infrastructure is treated as code—including documentation.
+I architect **resilient, observable systems** where every transaction is traceable, every failure is recoverable, and infrastructure is treated as code, including documentation.
 
 My approach treats **Documentation as Infrastructure**: standards live in version control and evolve through pull requests, not PDFs.
 
