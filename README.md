@@ -132,8 +132,8 @@ graph LR
 ---
 ## 🏆 Certifications
 
-- **[Terraform Associate (HashiCorp Certified)](https://www.credly.com/badges/d0cd5e66-64ea-4556-ae67-5b45073782a4/public_url)**  
-- **[AWS Certified Cloud Practitioner](https://www.credly.com/badges/2bd4abe7-1fbb-4ea2-a7a6-c609431acff3/public_url)**
+- **[Terraform Associate (HashiCorp Certified)](https://www.credly.com/badges/2bd4abe7-1fbb-4ea2-a7a6-c609431acff3/public_url)**  
+- **[AWS Certified Cloud Practitioner](https://www.credly.com/badges/d0cd5e66-64ea-4556-ae67-5b45073782a4/public_url)**
 ---
 ## 🧠 Engineering Philosophy
 
