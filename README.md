@@ -25,7 +25,7 @@ I am developing a local AI orchestration engine designed to automate the **Docum
 
 #### **System Architecture**
 
-The tool operates as a sovereign dispatcher, routing code through specialized spokes (Test & Readme) and an SLM pool (CodeBERT, Gemma, DeepSeek) to produce verified, audited output without data leakage.
+The tool operates as a sovereign dispatcher, routing code through specialized spokes (Test & Readme) and an SLM pool (CodeLLama, Gemma) to produce verified, audited output without data leakage.
 
 ```mermaid
 graph TD
