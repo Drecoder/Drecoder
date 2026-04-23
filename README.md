@@ -4,21 +4,22 @@
 Full-stack cloud engineer focused on building observable, resilient systems using Node.js, Go, and Terraform across AWS/GCP. I specialize in asynchronous workflows, event-driven architecture, and production-grade monitoring with OpenTelemetry, Prometheus, and Grafana.
 
 My approach treats **Documentation as Infrastructure**: standards live in version control and evolve through pull requests, not PDFs.
-🛠 Technical Skills 
 
-Languages:
+## 🛠 Technical Skills
+
+**Languages:**  
 Node.js, Go, Python, TypeScript
 
-Cloud & Infrastructure:
+**Cloud & Infrastructure:**  
 AWS, GCP, Terraform, Docker
 
-Architecture & Systems:
+**Architecture & Systems:**  
 Microservices, Event-Driven Architecture, Async Systems, Distributed Systems Basics
 
-DevOps / DevSecOps:
+**DevOps / DevSecOps:**  
 CI/CD, Checkov, Observability, Infrastructure as Code
 
-Monitoring & Observability:
+**Monitoring & Observability:**  
 Prometheus, Grafana, OpenTelemetry
 
 ---
@@ -178,11 +179,12 @@ A comprehensive Consultant-First Engineering Playbook and operational framework.
 `Markdown` · `ADRs` · `GitHub Actions` · `Documentation`
 
 ---
-🧠 Engineering Philosophy
-Observability-first design: systems must be measurable to be operable
-Failure-aware architecture: systems should degrade gracefully under load
-Infrastructure as code mindset: everything is version-controlled and automated
-Signal-driven operations: decisions should be based on telemetry, not assumptions
 
+## 🧠 Engineering Philosophy
+
+- Observability-first design: systems must be measurable to be operable
+- Failure-aware architecture: systems should degrade gracefully under load
+- Infrastructure as code mindset: everything is version-controlled and automated
+- Signal-driven operations: decisions should be based on telemetry, not assumptions
 
 
