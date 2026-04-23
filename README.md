@@ -5,7 +5,7 @@ Full-stack cloud engineer focused on building observable, resilient systems usin
 ---
 ## 🛠 Technical Skills
 **Languages:**  
-Node.js, Go, Python, TypeScript
+Node.js, Go, Python, TypeScript, React, Angular
 
 **Cloud & Infrastructure:**  
 AWS, GCP, Terraform, Docker
