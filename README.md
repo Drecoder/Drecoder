@@ -6,6 +6,22 @@ Full-stack cloud engineer focused on building observable, resilient systems usin
 My approach treats **Documentation as Infrastructure**: standards live in version control and evolve through pull requests, not PDFs.
 
 ---
+🛠 Technical Skills 
+
+Languages:
+Node.js, Go, Python, TypeScript
+
+Cloud & Infrastructure:
+AWS, GCP, Terraform, Docker
+
+Architecture & Systems:
+Microservices, Event-Driven Architecture, Async Systems, Distributed Systems Basics
+
+DevOps / DevSecOps:
+CI/CD, Checkov, Observability, Infrastructure as Code
+
+Monitoring & Observability:
+Prometheus, Grafana, OpenTelemetry
 
 ## 🛠 Technical Specialization
 
