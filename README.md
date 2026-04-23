@@ -151,22 +151,6 @@ graph LR
 - **[Terraform Associate (HashiCorp Certified)](https://www.credly.com/badges/2bd4abe7-1fbb-4ea2-a7a6-c609431acff3/public_url)**  
 - **[AWS Certified Cloud Practitioner](https://www.credly.com/badges/d0cd5e66-64ea-4556-ae67-5b45073782a4/public_url)**
 ---
-## 🧠 Engineering Philosophy
-
-**Flow Management**  
-Every action, workflow, and process must be observed, traceable, and recoverable. If it isn't instrumented, it doesn't exist.
-
-**Operational Continuity**  
-Service reliability is a signal-driven discipline. I implement Red/Green logic and progressive delivery to maintain system integrity during change.
-
-**Sovereignty-as-Code**  
-Networking foundations should automate compliance. I build modular, secure topologies that maintain security posture without manual intervention.
-
-**Mnemonic Mastery**  
-I apply memory athlete techniques such as "chunking, memory palaces, and spatial recall" to rapidly internalize complex algorithms and system architectures.
-
----
-
 ## 📂 Featured Systems
 
 ### [sovereign-vpc](https://github.com/Drecoder/sovereign-vpc)
@@ -194,12 +178,11 @@ A comprehensive Consultant-First Engineering Playbook and operational framework.
 `Markdown` · `ADRs` · `GitHub Actions` · `Documentation`
 
 ---
+🧠 Engineering Philosophy
+Observability-first design: systems must be measurable to be operable
+Failure-aware architecture: systems should degrade gracefully under load
+Infrastructure as code mindset: everything is version-controlled and automated
+Signal-driven operations: decisions should be based on telemetry, not assumptions
 
-## ⚖️ Strategic Competitive Edge
-I value Observability-First design: I see the pattern where code is only "production-ready" once it provides clear signals. By integrating OpenTelemetry and Prometheus metrics, I ensure systems are observable and traceable from day one.
 
-I understand the patterns of Cloud Sovereignty: I see the cloud as more than just hosting; it is a foundation for trust. I move beyond basic VPCs to implement Sovereignty-as-Code and Hub-and-Spoke models that protect sensitive data environments.
 
-I understand the trade-offs of Velocity vs. Risk: I recognize that speed should not compromise safety. I bridge this gap by developing specialized Go-based governance auditors that automate SOC2 evidence generation, allowing teams to maintain momentum without losing compliance.
-
----
