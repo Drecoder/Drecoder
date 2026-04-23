@@ -153,7 +153,7 @@ graph LR
 ## 📂 Featured Systems
 
 ### [sovereign-vpc](https://github.com/Drecoder/sovereign-vpc)
-WIP — A Google Cloud Platform (GCP) networking foundation built with HCL (Terraform) that implements Zero-Trust principles and Sovereignty-as-Code. It features a modular VPC architecture with Hub-and-Spoke peering and automated compliance controls.  
+A Google Cloud Platform (GCP) networking foundation built with HCL (Terraform) that implements Zero-Trust principles and Sovereignty-as-Code. It features a modular VPC architecture with Hub-and-Spoke peering and automated compliance controls.  
 `HCL` · `Terraform` · `GCP` · `Zero-Trust`
 
 ### [data-net-vpc](https://github.com/Drecoder/data-net-vpc)
