@@ -1,7 +1,7 @@
 # 🚀 Andres Arias | SWE  → Platform / Cloud Infrastructure · DevOps
 ###  Full-Stack Cloud Engineer 
 
-I architect **resilient, observable systems** where every transaction is traceable, every failure is recoverable, and infrastructure is treated as code, including documentation.
+Full-stack cloud engineer focused on building observable, resilient systems using Node.js, Go, and Terraform across AWS/GCP. I specialize in asynchronous workflows, event-driven architecture, and production-grade monitoring with OpenTelemetry, Prometheus, and Grafana.
 
 My approach treats **Documentation as Infrastructure**: standards live in version control and evolve through pull requests, not PDFs.
 
