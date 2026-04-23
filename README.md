@@ -3,14 +3,7 @@
 
 Full-stack cloud engineer focused on building observable, resilient systems using Node.js, Go, and Terraform across AWS/GCP. I specialize in asynchronous workflows, event-driven architecture, and production-grade monitoring with OpenTelemetry, Prometheus, and Grafana.
 ---
-## 🏆 Certifications
-
-- **[AWS Certified Solutions Architect – Associate](https://www.credly.com/badges/06095a2b-b56d-4876-8801-caa862bc4ad7)**  
-- **[Terraform Associate (HashiCorp Certified)](https://www.credly.com/badges/2bd4abe7-1fbb-4ea2-a7a6-c609431acff3/public_url)**  
-- **[AWS Certified Cloud Practitioner](https://www.credly.com/badges/d0cd5e66-64ea-4556-ae67-5b45073782a4/public_url)**
----
 ## 🛠 Technical Skills
-
 **Languages:**  
 Node.js, Go, Python, TypeScript
 
@@ -26,6 +19,12 @@ CI/CD, Checkov, Observability, Infrastructure as Code
 **Monitoring & Observability:**  
 Prometheus, Grafana, OpenTelemetry
 
+---
+## 🏆 Certifications
+
+- **[AWS Certified Solutions Architect – Associate](https://www.credly.com/badges/06095a2b-b56d-4876-8801-caa862bc4ad7)**  
+- **[Terraform Associate (HashiCorp Certified)](https://www.credly.com/badges/2bd4abe7-1fbb-4ea2-a7a6-c609431acff3/public_url)**  
+- **[AWS Certified Cloud Practitioner](https://www.credly.com/badges/d0cd5e66-64ea-4556-ae67-5b45073782a4/public_url)**
 ---
 ## 🛠 Technical Specialization
 
