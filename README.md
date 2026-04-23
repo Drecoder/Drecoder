@@ -4,8 +4,6 @@
 Full-stack cloud engineer focused on building observable, resilient systems using Node.js, Go, and Terraform across AWS/GCP. I specialize in asynchronous workflows, event-driven architecture, and production-grade monitoring with OpenTelemetry, Prometheus, and Grafana.
 
 My approach treats **Documentation as Infrastructure**: standards live in version control and evolve through pull requests, not PDFs.
-
----
 🛠 Technical Skills 
 
 Languages:
@@ -23,6 +21,7 @@ CI/CD, Checkov, Observability, Infrastructure as Code
 Monitoring & Observability:
 Prometheus, Grafana, OpenTelemetry
 
+---
 ## 🛠 Technical Specialization
 
 | Domain | Core Competencies |
