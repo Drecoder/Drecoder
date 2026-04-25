@@ -1,4 +1,4 @@
-# 🚀 Andres Arias | SWE  → Platform / Cloud Infrastructure · DevOps
+# 🚀 Andres Arias | Senior SWE  → Platform / Cloud Infrastructure · DevOps
 ###  Full-Stack Cloud Engineer 
 
 Full-stack cloud engineer focused on building observable, resilient systems using Node.js, Go, and Terraform across AWS/GCP. I specialize in asynchronous workflows, event-driven architecture, and production-grade monitoring with OpenTelemetry, Prometheus, and Grafana.
