@@ -36,6 +36,14 @@ Prometheus, Grafana, OpenTelemetry
 - **[AWS Certified Cloud Practitioner](https://www.credly.com/badges/d0cd5e66-64ea-4556-ae67-5b45073782a4/public_url)**
 - **[Academy Accreditation - Platform Administrator](https://api.accredible.com/v1/frontend/credential_website_embed_image/badge/180751950)**
 ---
+## 🧠 Engineering Philosophy
+
+- Observability-first design: systems must be measurable to be operable
+- Failure-aware architecture: systems should degrade gracefully under load
+- Infrastructure as code mindset: everything is version-controlled and automated
+- Signal-driven operations: decisions should be based on telemetry, not assumptions
+---
+
 ## 🛠 Technical Specialization
 
 | Domain | Core Competencies |
@@ -186,12 +194,3 @@ A comprehensive Consultant-First Engineering Playbook and operational framework.
 `Markdown` · `ADRs` · `GitHub Actions` · `Documentation`
 
 ---
-
-## 🧠 Engineering Philosophy
-
-- Observability-first design: systems must be measurable to be operable
-- Failure-aware architecture: systems should degrade gracefully under load
-- Infrastructure as code mindset: everything is version-controlled and automated
-- Signal-driven operations: decisions should be based on telemetry, not assumptions
-
-
