@@ -46,11 +46,13 @@ Prometheus, Grafana, OpenTelemetry
 
 ## 🛠 Technical Specialization
 
-Domain          | Core Competencies
-Architecture    | Event-driven systems · Apache Kafka · Cloud-native design patterns · Asynchronous workflows
-Infrastructure  | GCP · AWS · Terraform · Zero-Trust networking · Hub-and-Spoke topology
-Backend         | Go · Python · Node.js · Adaptive concurrency control
-DevSecOps       | Security-first CI/CD · Checkov · SOC2 governance · Compliance-as-Code
+**Architecture** · Event-driven systems · Apache Kafka · Cloud-native design patterns · Asynchronous workflows · RAG systems
+
+**Infrastructure** · GCP · AWS · Terraform (HashiCorp Certified) · Zero-Trust networking · Hub-and-Spoke topology
+
+**Backend & Performance** · Go · Python (Django/FastAPI/Flask) · Node.js · Adaptive concurrency control
+
+**DevSecOps** · Security-first CI/CD · Checkov · Automated SOC2 governance · Compliance-as-Code
 
 ---
 ## 🚀 Currently Working On
