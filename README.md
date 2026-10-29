@@ -7,6 +7,8 @@ The rule I hold myself to: **a standard counts only when it is enforced and runn
 
 📊 **[The AI Software Factory: architecture overview](software-factory-overview.pdf)** (PDF, 10 slides)
 
+📓 **[Proof journal](https://github.com/Drecoder/Engineering_Excellence_Playbook/blob/main/docs/POC_JOURNAL.md)**: what applying the playbook actually found while building the factory, with the evidence, including the findings still open.
+
 ## 🎯 The Goals
 
 Not a bigger factory: **a smaller one that is complete and independently verifiable.** No new features until the first complete release path is proven.
