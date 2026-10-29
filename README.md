@@ -7,6 +7,16 @@ The rule I hold myself to: **a standard counts only when it is enforced and runn
 
 📊 **[The AI Software Factory: architecture overview](software-factory-overview.pdf)** (PDF, 10 slides)
 
+## 🎯 The Goal
+
+Not a bigger factory: **a smaller one that is complete and independently verifiable.**
+
+- **One complete release, end to end:** an approved spec becomes the Builder's pull request, passes the Reviewer and the central gate, is merged by a person, and is published as a signed image with its SBOM and provenance. A compliance decision is bound to that exact build, and only that image is admitted to deploy. One reproducible run, with no other way to release.
+- **Proven by what it refuses:** a merge without approval, a tampered or unsigned image, a replayed or mis-scoped release token, and a direct deploy are each shown to be blocked.
+- **The first real workload is the factory's own infrastructure:** the agents take Genesis, whose gate is red today, to green through the same specs, reviews, and approved merges as any change.
+- **Then the economics:** the cost of a safely accepted change, measured against doing the same work by hand.
+- **Scored from evidence:** from a baseline of 61 toward 90 against the playbook.
+
 ---
 
 ## 📘 The Playbook
