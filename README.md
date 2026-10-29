@@ -1,30 +1,44 @@
 🚀 **Andres Arias**
 *Senior Cloud Engineer & Node.js Developer | AWS Solutions Architect | Distributed Systems | Infrastructure Automation*
 
-I build and maintain resilient, national-scale cloud infrastructure and distributed backend systems. My work focuses on high-availability architectures (99.99%), observability-first design, and secure data engineering in regulated environments.
+I'm building a **software factory**: AI agents that turn an approved requirement into a released change, under the same standards, gates, and human-approved merges as any engineer. The standard it is held to is public, in the **[Engineering Excellence Playbook](https://github.com/Drecoder/Engineering_Excellence_Playbook)**.
+
+The rule I hold myself to: **a standard counts only when it is enforced and running**, not when it is written down.
 
 ---
 
-## 📂 Featured Systems (Aligned with Production Experience)
+## 📘 The Playbook
 
-**[Genesis](https://github.com/Drecoder/Genesis)** — *Terraform | Multi-Cloud | Infrastructure-as-Platform*  
-A Day 0 Infrastructure-as-Platform (IaP) framework for provisioning secure, observable, production-ready foundations across AWS, GCP, and Azure. Implements decentralized state, OIDC-based authentication, and embedded governance with SCPs, Azure Policy, and GCP Org Constraints.
+The [Engineering Excellence Playbook](https://github.com/Drecoder/Engineering_Excellence_Playbook) is the factory's rulebook. Its enforceable rules (`AGENTS.md`) are vendored into each service repository at a pinned commit, so engineers, coding assistants, and the factory's own agents read the same contract.
 
-**[Adaptive-Concurrency-Orchestrator](https://github.com/Drecoder/Adaptive-Concurrency-Orchestrator)** — *Node.js | Distributed Systems | Reliability Engineering*  
-A request-concurrency controller designed to protect Headless WordPress and Next.js backends. Implements adaptive limit-adjusting logic to maintain system stability and prevent cascading failures under high load.
+- **Standards by zone:** universal, frontend, backend, infrastructure, runbooks, and agents.
+- **Contracts as versioned JSON Schemas** with test vectors.
+- **Incident records** in post-mortem form for every failure and near miss, each pointing at its evidence.
+- **Program increments** that grade the factory against the playbook from evidence, from a baseline of 61 toward a bar of 90.
 
-**[HOTEL](https://github.com/Drecoder/hotel)** — *Event-Driven Architecture | NestJS | Kafka | GraphQL*  
-A microservices-ready Hotel Operations platform. Demonstrates event-driven design patterns using Apache Kafka for message brokering, event streaming, and state persistence across a distributed backend.
+## 🏭 The Factory
 
-**[data-net-vpc](https://github.com/Drecoder/data-net-vpc)** — *GCP Networking | Terraform | Security Automation*  
-An observability-focused networking project demonstrating advanced VPC architecture in GCP. It integrates automated CI/CD pipelines with Checkov security scans to maintain a security-first posture and ensure continuous compliance through Infrastructure as Code.
+Each repository is a bench with one job. The playbook is public; the benches are private.
 
----
+| Bench | Job | Status |
+| :--- | :--- | :--- |
+| Central CI | One reusable gate that every repository calls | Running |
+| Builder | Builds a change from an approved spec and opens the pull request | Built, pull-request driven |
+| Reviewer | Reviews through lenses (reuse, security, architecture); it advises, people approve | Built, pull-request driven |
+| rig | Measures: architecture checks, features, the symbol index | Built |
+| Compliance authority | Verifies evidence and issues single-use release tokens | Runs as a CLI; service in progress |
+| Notepad | Working memory: a sealed, hash-chained record of every task | Library on local backends |
+| Genesis | Governance guardrails and project vending, per cloud | Bootstrap in progress |
 
-## 🧠 Engineering Focus
+## ✅ Running Today
 
-- **Distributed Systems:** Designing for fault tolerance, idempotency, and eventual consistency.
+- **One central CI gate**, called by commit SHA from every repository: secret scanning, Trivy, Semgrep, and per-stack lint, type checks, tests, coverage floors, and license policy. One severity rule for every scanner: CRITICAL or CISA KEV blocks, and the gate fails closed.
+- **The gate tests itself.** Fixture projects run the real gate on every change to it, and each check is shown to fail on the defect it guards against before it counts. A skipped job is not a pass.
+- **Every service ships a container image:** the gate builds it, runs its tests inside it unprivileged with no network, and scans it, and fails a repository that neither builds one nor says why it has none. Vulnerabilities are fixed at their source, not excepted. Services are moving onto this gate version now.
+- **Pinned inputs:** images by digest, actions by commit SHA, downloaded tools by checksum, dependencies through committed lockfiles.
 
-- **Observability-as-Code:** Moving beyond logs to structured telemetry and actionable metrics.
+## 🔜 In Progress
 
-- **Security & Compliance:** Hardening infrastructure for FISMA/SOC2 standards using automated governance and static analysis (Checkov).
+- **Continuous delivery:** every merge publishes an image by digest with an SBOM, a keyless signature, and SLSA provenance; promotion through human-approved merges; deploys admitted only through a deployment guard and Binary Authorization.
+- **The event-driven loop:** every handoff between benches as an event, with an outbox, an inbox, and dead-letter queues.
+- **Autonomy by evidence:** a person leaves a step only when the measurements show the step is stable and better without them.
