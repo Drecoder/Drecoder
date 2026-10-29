@@ -5,6 +5,8 @@ I'm building a **software factory**: AI agents that turn an approved requirement
 
 The rule I hold myself to: **a standard counts only when it is enforced and running**, not when it is written down.
 
+📊 **[The AI Software Factory: architecture overview](software-factory-overview.pdf)** (PDF, 10 slides)
+
 ---
 
 ## 📘 The Playbook
