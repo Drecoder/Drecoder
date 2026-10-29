@@ -7,15 +7,31 @@ The rule I hold myself to: **a standard counts only when it is enforced and runn
 
 📊 **[The AI Software Factory: architecture overview](software-factory-overview.pdf)** (PDF, 10 slides)
 
-## 🎯 The Goal
+## 🎯 The Goals
 
-Not a bigger factory: **a smaller one that is complete and independently verifiable.**
+Not a bigger factory: **a smaller one that is complete and independently verifiable.** No new features until the first complete release path is proven.
 
-- **One complete release, end to end:** an approved spec becomes the Builder's pull request, passes the Reviewer and the central gate, is merged by a person, and is published as a signed image with its SBOM and provenance. A compliance decision is bound to that exact build, and only that image is admitted to deploy. One reproducible run, with no other way to release.
-- **Proven by what it refuses:** a merge without approval, a tampered or unsigned image, a replayed or mis-scoped release token, and a direct deploy are each shown to be blocked.
-- **The first real workload is the factory's own infrastructure:** the agents take Genesis, whose gate is red today, to green through the same specs, reviews, and approved merges as any change.
-- **Then the economics:** the cost of a safely accepted change, measured against doing the same work by hand.
-- **Scored from evidence:** from a baseline of 61 toward 90 against the playbook.
+**P0: Prove the trust boundaries**
+- Rulesets and required checks on every factory repository, with no bypass.
+- Compliance decisions bound to the exact commit, CI run, image digest, and policy version.
+- Tampered, expired, mis-scoped, and replayed release tokens rejected; a token consumed exactly once, even under concurrent requests; deploys fail closed when the verifier is down.
+- Deploys refused for any image without trusted attestations.
+- *Exit:* negative tests show each unauthorized path is rejected, and the paths not yet tested are listed.
+
+**P0: Complete one release lifecycle**
+- One change from approved spec through the Builder, the Reviewer, the central gate, a human-approved merge, signed provenance and an SBOM, the compliance decision, and deployment admission.
+- The first real workload is the factory's own infrastructure: the agents take Genesis, whose gate is red today, to green.
+- *Exit:* a reproducible run with a verified artifact, an auditable decision, and a deploy, with no other way to release.
+
+**P1: Demonstrate the economics**
+- Factory-assisted delivery against a documented manual baseline, on comparable tasks with the same acceptance criteria: time from requirement to accepted release, human correction time, escaped defects, cost per accepted change, and recovery time.
+- *Exit:* the measurements published with their method, sample size, and limits.
+
+**P2: Earn broader autonomy**
+- Larger work only after repeated evidence of reliable behavior, with escalation paths, recovery procedures, and explicit limits on high-risk operations.
+- *Exit:* a defined workload handled with measured reliability, bounded authority, and safe recovery.
+
+Progress is scored from evidence against the playbook: a baseline of 61, toward 90.
 
 ---
 
