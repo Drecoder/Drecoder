@@ -1,17 +1,17 @@
-🚀 **Andres Arias**
-*Senior Cloud Engineer & Node.js Developer | AWS Solutions Architect | Distributed Systems | Infrastructure Automation*
+# 🚀 Andres Arias
+**Senior Cloud Engineer & Node.js Developer | AWS Solutions Architect | Distributed Systems | Infrastructure Automation**
 
-I'm building a **software factory**: AI agents that turn an approved requirement into a released change, under the same standards, gates, and human-approved merges as any engineer. The standard it is held to is public, in the **[Engineering Excellence Playbook](https://github.com/Drecoder/Engineering_Excellence_Playbook)**.
+I'm building a software factory: AI agents that turn an approved requirement into a released change, under the same standards, gates, and human-approved merges as any engineer. The standard it is held to is public, in the [Engineering Excellence Playbook](https://github.com/Drecoder/Engineering_Excellence_Playbook).
 
-The rule I hold myself to: **a standard counts only when it is enforced and running**, not when it is written down.
+The rule I hold myself to: a standard counts only when it is enforced and running, not when it is written down.
 
-📊 **[The AI Software Factory: architecture overview](software-factory-overview.pdf)** (PDF, 10 slides)
+📊 [The AI Software Factory: architecture overview (PDF, 10 slides)](TODO-LINK)
 
-📓 **[Proof journal](https://github.com/Drecoder/Engineering_Excellence_Playbook/blob/main/docs/POC_JOURNAL.md)**: what applying the playbook actually found while building the factory, each finding written up as a CAPA post-mortem (problem, root cause, correction, preventive action, verification), including the ones still open. CI keeps it append-only. A **[CAPA register](https://github.com/Drecoder/Engineering_Excellence_Playbook/blob/main/docs/FINDINGS_REGISTER.json)** ranks every finding by severity with a mandatory deadline (critical 7 days, high 30, medium 90, low 180), measures how many controls are proven to fail on their defect, and keeps production readiness false while any critical or high security or governance finding is open.
+📓 [Proof journal](https://github.com/Drecoder/Engineering_Excellence_Playbook/blob/main/docs/POC_JOURNAL.md): what applying the playbook actually found while building the factory, each finding written up as a CAPA post-mortem (problem, root cause, correction, preventive action, verification), including the ones still open. CI keeps it append-only. A [CAPA register](https://github.com/Drecoder/Engineering_Excellence_Playbook/blob/main/docs/FINDINGS_REGISTER.json) ranks every finding by severity with a mandatory deadline (critical 7 days, high 30, medium 90, low 180), measures how many controls are proven to fail on their defect, and keeps production readiness false while any critical or high security or governance finding is open.
 
 ## 🎯 The Goals
 
-Not a bigger factory: **a smaller one that is complete and independently verifiable.** No new features until the first complete release path is proven.
+Not a bigger factory: a smaller one that is complete and independently verifiable. No new features until the first complete release path is proven.
 
 **P0: Prove the trust boundaries**
 - Rulesets and required checks on every factory repository, with no bypass.
@@ -35,16 +35,14 @@ Not a bigger factory: **a smaller one that is complete and independently verifia
 
 Progress is scored from evidence against the playbook: a baseline of 61, toward 90.
 
----
-
 ## 📘 The Playbook
 
 The [Engineering Excellence Playbook](https://github.com/Drecoder/Engineering_Excellence_Playbook) is the factory's rulebook. Its enforceable rules (`AGENTS.md`) are vendored into each service repository at a pinned commit, so engineers, coding assistants, and the factory's own agents read the same contract.
 
-- **Standards by zone:** universal, frontend, backend, infrastructure, runbooks, and agents.
-- **Contracts as versioned JSON Schemas** with test vectors.
-- **Incident records** in post-mortem form for every failure and near miss, each pointing at its evidence.
-- **Program increments** that grade the factory against the playbook from evidence, from a baseline of 61 toward a bar of 90.
+- Standards by zone: universal, frontend, backend, infrastructure, runbooks, agents, and the software factory.
+- Contracts as versioned JSON Schemas with test vectors.
+- Incident records in post-mortem form for every failure and near miss, each pointing at its evidence.
+- Program increments that grade the factory against the playbook from evidence, from a baseline of 61 toward a bar of 90.
 
 ## 🏭 The Factory
 
@@ -57,8 +55,13 @@ Each repository is a bench with one job. The playbook is public; the benches are
 | Reviewer | Reviews through lenses (reuse, security, architecture); it advises, people approve | Built, pull-request driven |
 | rig | Measures: architecture checks, features, the symbol index | Built |
 | Compliance authority | Verifies evidence and issues single-use release tokens | Runs as a CLI; service in progress |
-| Notepad | Working memory: a sealed, hash-chained record of every task | Library on local backends |
+| Notepad | Working memory: a sealed, hash-chained record of every task, and the hand-off between agents | Library on local backends |
+| Orchestrator | Moves one approved Jira ticket at a time through build, gates, and review | Spec written |
+| CRAP and mutation analysis | Deterministic quality measurements; each finding becomes its own ticket | Spec written |
+| Fixers | Small agents that each fix one CRAP or mutation finding, in a scope CI enforces | Designed |
 | Genesis | Governance guardrails and project vending, per cloud | Bootstrap in progress |
+
+No model provider checks its own output: the models that write, review, and test a change come from different providers. An architect, person or agent, drafts each spec, and work starts only when I approve the ticket.
 
 ## ✅ Running Today
 
@@ -69,6 +72,7 @@ Each repository is a bench with one job. The playbook is public; the benches are
 
 ## 🔜 In Progress
 
+- **The Jira loop:** the orchestrator takes an approved ticket through the Builder, the gates, finding tickets for the fixers, and one final review, with the notepad carrying context between agents.
 - **Continuous delivery:** every merge publishes an image by digest with an SBOM, a keyless signature, and SLSA provenance; promotion through human-approved merges; deploys admitted only through a deployment guard and Binary Authorization.
 - **The event-driven loop:** every handoff between benches as an event, with an outbox, an inbox, and dead-letter queues.
 - **Autonomy by evidence:** a person leaves a step only when the measurements show the step is stable and better without them.
