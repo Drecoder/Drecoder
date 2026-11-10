@@ -6,7 +6,7 @@ I'm building a software factory: AI agents that turn an approved requirement int
 
 The rule I hold myself to: a standard counts only when it is enforced and running, not when it is written down.
 
-📓 **[Proof journal](https://github.com/Drecoder/Engineering_Excellence_Playbook/blob/main/docs/POC_JOURNAL.md):** what applying the playbook actually found while building the factory, each finding written up as a CAPA post-mortem (problem, root cause, correction, preventive action, verification), including the ones still open. CI enforces append-only on pull requests. A CAPA register ranks every finding by severity with a mandatory deadline (critical 7 days, high 30, medium 90, low 180), measures how many controls are proven to fail on their defect, and keeps production readiness false while any critical or high security or governance finding is open.
+📓 **[Proof journal](https://github.com/Drecoder/Engineering_Excellence_Playbook/blob/main/docs/POC_JOURNAL.md):** what applying the playbook actually found while building the factory, each finding written up as a CAPA post-mortem (problem, root cause, correction, preventive action, verification), including the ones still open. CI enforces append-only on every pull request, on `main`, and daily. A CAPA register ranks every finding by severity with a mandatory deadline (critical 7 days, high 30, medium 90, low 180), measures how many controls are proven to fail on their defect, and keeps production readiness false while any critical or high security or governance finding is open.
 
 ## 🏛️ The Architecture
 
@@ -27,7 +27,7 @@ Not a bigger factory: a smaller one that is complete and independently verifiabl
 
 **P0: Prove the trust boundaries**
 
-- Rulesets and required checks on every factory repository, with no bypass. Open today: no repository's `main` is protected yet (INC-001).
+- Rulesets and required checks on every factory repository, with no bypass. Rulesets now protect the playbook, Genesis, and the orchestrator, with the required checks bound to GitHub Actions (INC-001 fixed, not yet proven: a refused direct push is still to be shown). A required approving review waits until the agents act under their own GitHub App identities.
 - Agents hold no execution-plane identity and cannot change the checks that evaluate them.
 - Compliance decisions bound to the exact commit, CI run, image digest, and policy version.
 - Tampered, expired, mis-scoped, and replayed release tokens rejected; a token consumed exactly once, even under concurrent requests; deploys fail closed when the verifier is down.
@@ -37,7 +37,7 @@ Not a bigger factory: a smaller one that is complete and independently verifiabl
 **P0: Complete one release lifecycle**
 
 - One change from approved spec through the Builder, the central gate with its acceptance tests and Policy Engine, a human-approved merge, signed provenance and an SBOM, the compliance decision, and deployment admission.
-- The first real ticket is the factory's own Policy Engine service, which must reproduce the standard's 54 test vectors byte for byte. The agents then take Genesis, whose gate is red today, to green.
+- The Policy Engine's decision core was built and merged ahead of the loop, so the Builder's first real ticket is another service. The agents then take Genesis, whose gate is red today, to green.
 - **Exit:** a reproducible run with a verified artifact, an auditable decision, and a deploy, with no other way to release.
 
 **P1: Demonstrate the economics**
@@ -51,7 +51,7 @@ Not a bigger factory: a smaller one that is complete and independently verifiabl
 - Larger work only after repeated evidence of reliable behavior, with escalation paths, recovery procedures, and explicit limits on high-risk operations.
 - **Exit:** a defined workload handled with measured reliability, bounded authority, and safe recovery.
 
-Progress is scored from evidence against the playbook. Baseline 61 (Oct 28); the latest re-grade, 50 (Nov 6), counts only what is enforced and running on `main`. Next target 70, toward a bar of 90.
+Progress is scored from evidence against the playbook. Baseline 61 (Oct 28); the latest re-grade, 50 (Nov 6), counts only what is enforced and running on `main`. Next target 70, toward a bar of 90. Against the MVP itself: about 53 of 100 (Nov 10), about 58 once mutation testing and CRAP run in CI, and about 73 at the first dry run.
 
 ## 📘 The Playbook
 
@@ -71,8 +71,8 @@ Each repository is a bench with one job. The playbook is public; the benches are
 | Bench | Plane | Job | Status |
 | :--- | :--- | :--- | :--- |
 | Central CI | Execution | One reusable gate that every repository calls | Running |
-| Policy Engine | Execution | Decides PASS, BLOCK, or QUARANTINE from normalized quality metrics, with no network and no model | Standard, contracts, and 54 test vectors merged; the service is the MVP ticket |
-| Orchestrator | Agentic | Leases one approved Jira ticket at a time, hands it to the Builder, and reads the CI result; the only writer to the board | Designed; next to build |
+| Policy Engine | Execution | Decides PASS, BLOCK, or QUARANTINE from normalized quality metrics, with no network and no model | Decision core merged: 98 tests, 99% coverage, every hand mutant killed; not yet wired into the gate |
+| Orchestrator | Agentic | Leases one approved Jira ticket at a time, hands it to the Builder, and reads the CI result; the only writer to the board | Fenced lease, telemetry, and a deployable image on `main` (built, tested inside its container, and scanned in CI); its Jira, DynamoDB, and GitHub adapters and the AWS deploy come next |
 | Builder | Agentic | A Strands agent on open-weight gpt-oss-20b, on spot capacity that scales to zero; gpt-oss-120b on Bedrock for harder tickets | Pull-request wrapper built; open-weight Builder designed |
 | Event bus | Agentic | SNS and SQS with claim checks, an outbox, and dead-letter queues | Designed; part of the MVP |
 | rig | Agentic | Measures: architecture checks, features, the symbol index | Built |
@@ -90,11 +90,14 @@ No model provider checks its own output: the model that writes a change and the 
 - The gate tests itself. Fixture projects run the real gate on every change to it, and each check is shown to fail on the defect it guards against before it counts. A skipped job is not a pass.
 - Every service ships a container image: the gate builds it, runs its tests inside it unprivileged with no network, and scans it, and fails a repository that neither builds one nor says why it has none. Vulnerabilities are fixed at their source, not excepted.
 - Pinned inputs: images by digest, actions by commit SHA, downloaded tools by checksum, dependencies through committed lockfiles.
-- The Quality Policy Engine standard is in the playbook: contracts, a reference engine, and 54 test vectors.
+- The Quality Policy Engine: its standard, contracts, and 54 test vectors in the playbook, and its decision core merged with 98 tests, 99% coverage, and every hand mutant killed.
+- The CAPA register's controls run on every pull request, on `main`, and daily: a row for every journal entry, deadlines within their severity, overdue findings failing the daily run, and production readiness reported.
 
 ## 🔜 Now
 
-Operational safety: branch protection on every factory repository, alerts on failed deployments, automatic shutdown of idle compute, and a clean dev deployment.
+**A hard stop:** nothing more is built until mutation testing and CRAP scoring run in the central CI (mutmut, Stryker, the normalizer, then the Policy Engine wired into the gate). A factory that measures test quality should not grow while its own gate cannot.
+
+Then operational safety: branch protection on the remaining factory repositories, alerts on failed deployments, automatic shutdown of idle compute, and a clean dev deployment.
 
 ## ⏭️ Next
 
@@ -105,3 +108,4 @@ Operational safety: branch protection on every factory repository, alerts on fai
 
 - **Autonomy by evidence:** a person leaves a step only when the measurements show the step is stable and better without them.
 - **The adaptive harness:** agents that choose their next step from reliability and quality evidence, without ever authorizing themselves. Proposed in the playbook, parked at review.
+- **The learning loop:** each agent keeps its own journal and learns only from its own verified mistakes. The journal becomes a graph with risk weights that steer nothing until they are calibrated, and fine-tuning stays closed until it is decided as a protected change. [Proposed in the playbook](https://github.com/Drecoder/Engineering_Excellence_Playbook/blob/main/06_AgentZone/10_CAPA_Graph_and_Risk_Weighted_Learning.md).
