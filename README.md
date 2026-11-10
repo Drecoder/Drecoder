@@ -51,7 +51,27 @@ Not a bigger factory: a smaller one that is complete and independently verifiabl
 - Larger work only after repeated evidence of reliable behavior, with escalation paths, recovery procedures, and explicit limits on high-risk operations.
 - **Exit:** a defined workload handled with measured reliability, bounded authority, and safe recovery.
 
-Progress is scored from evidence against the playbook. Baseline 61 (Oct 28); the latest re-grade, 50 (Nov 6), counts only what is enforced and running on `main`. Next target 70, toward a bar of 90. Against the MVP itself: about 53 of 100 (Nov 10), about 58 once mutation testing and CRAP run in CI, and about 73 at the first dry run.
+Progress is scored from evidence against the playbook. Baseline 61 (Oct 28); the latest re-grade, 50 (Nov 6), counts only what is enforced and running on `main`. Next target 70, toward a bar of 90.
+
+## 🗺️ Roadmap
+
+Where the MVP stands (Nov 10), scored from what is merged and running:
+
+```text
+MVP
+  now         █████████████████████░░░░░░░░░░░░░░░░░░░  ~53
+  CI lifts    ███████████████████████░░░░░░░░░░░░░░░░░  ~58
+  1st dry run █████████████████████████████░░░░░░░░░░░  ~73
+
+PHASES
+  0 Unblock       ██████████████░░░░░░   7/10  the week's pull requests merged; two items left
+  1 Orchestrator  ████░░░░░░░░░░░░░░░░   6/30  fence, telemetry, and image on main; AWS waits on the gate
+  2 Builder + CI  ██████░░░░░░░░░░░░░░   8/25  ◂ here: the Policy Engine's decision core merged
+  3 Journal loop  ███░░░░░░░░░░░░░░░░░   3/20  designed; continues in its own project
+  4 Harness       █░░░░░░░░░░░░░░░░░░░   1/15  proposed; continues in its own project
+```
+
+The hard stop sits in phase 2: nothing more is built until mutation testing and CRAP scoring run in CI. Lifting it is worth about 5 points to the MVP; the first dry run of one ticket through the loop is the next big step.
 
 ## 📘 The Playbook
 
