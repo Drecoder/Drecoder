@@ -55,23 +55,23 @@ Progress is scored from evidence against the playbook. Baseline 61 (Oct 28); the
 
 ## 🗺️ Roadmap
 
-Where the MVP stands (Nov 10), scored from what is merged and running:
+Where the MVP stands (Nov 11), scored from what is merged and running:
 
 ```text
 MVP
-  now         █████████████████████░░░░░░░░░░░░░░░░░░░  ~53
-  CI lifts    ███████████████████████░░░░░░░░░░░░░░░░░  ~58
+  now         ████████████████████████░░░░░░░░░░░░░░░░  ~60
   1st dry run █████████████████████████████░░░░░░░░░░░  ~73
+  MVP         ████████████████████████████████████████  100
 
 PHASES
-  0 Unblock       ██████████████░░░░░░   7/10  the week's pull requests merged; two items left
-  1 Orchestrator  ████░░░░░░░░░░░░░░░░   6/30  fence, telemetry, and image on main; AWS waits on the gate
-  2 Builder + CI  ██████░░░░░░░░░░░░░░   8/25  ◂ here: the Policy Engine's decision core merged
-  3 Journal loop  ███░░░░░░░░░░░░░░░░░   3/20  designed; continues in its own project
-  4 Harness       █░░░░░░░░░░░░░░░░░░░   1/15  proposed; continues in its own project
+  0 Unblock       ███████████████░░░░░   7.5/10  auto-merge merged; rulesets and the agents' own GitHub App left
+  1 Orchestrator  ████░░░░░░░░░░░░░░░░   6/30    two proven defects fixed and tested, not yet merged
+  2 Builder + CI  ███████████░░░░░░░░░  13/25    ◂ here: CRAP, mutation and the Policy Engine run in the central gate
+  3 Journal loop  ███░░░░░░░░░░░░░░░░░   3/20    designed; continues in its own project
+  4 Harness       █░░░░░░░░░░░░░░░░░░░   1/15    proposed; continues in its own project
 ```
 
-The hard stop sits in phase 2: nothing more is built until mutation testing and CRAP scoring run in CI. Lifting it is worth about 5 points to the MVP; the first dry run of one ticket through the loop is the next big step.
+The hard stop is lifted: CRAP scoring and mutation testing run in the central CI, CRAP first, through the Policy Engine. Next, in order: the agents open pull requests as their own GitHub App, because my review is the loop's bottleneck; the orchestrator's fixes; then the first dry run of one ticket through the loop.
 
 ## 📘 The Playbook
 
@@ -91,14 +91,14 @@ Each repository is a bench with one job. The playbook is public; the benches are
 | Bench | Plane | Job | Status |
 | :--- | :--- | :--- | :--- |
 | Central CI | Execution | One reusable gate that every repository calls | Running |
-| Policy Engine | Execution | Decides PASS, BLOCK, or QUARANTINE from normalized quality metrics, with no network and no model | Decision core merged: 98 tests, 99% coverage, every hand mutant killed; not yet wired into the gate |
+| Policy Engine | Execution | Decides PASS, BLOCK, or QUARANTINE from normalized quality metrics, with no network and no model | Running in the central gate: CRAP from ESLint complexity and coverage, measured on the change and its merge base |
 | Orchestrator | Agentic | Leases one approved Jira ticket at a time, hands it to the Builder, and reads the CI result; the only writer to the board | Fenced lease, telemetry, and a deployable image on `main` (built, tested inside its container, and scanned in CI); its Jira, DynamoDB, and GitHub adapters and the AWS deploy come next |
 | Builder | Agentic | A Strands agent on open-weight gpt-oss-20b, on spot capacity that scales to zero; gpt-oss-120b on Bedrock for harder tickets | Pull-request wrapper built; open-weight Builder designed |
 | Event bus | Agentic | SNS and SQS with claim checks, an outbox, and dead-letter queues | Designed; part of the MVP |
 | rig | Agentic | Measures: architecture checks, features, the symbol index | Built |
 | Notepad | Agentic | Working memory: a sealed, hash-chained record of every task | Library on local backends |
 | Compliance authority | Execution | Verifies evidence and issues single-use release tokens | Runs as a CLI; service in progress |
-| Genesis | Both | Governance guardrails and project vending, per cloud | Bootstrap in progress |
+| Genesis | Both | Governance guardrails, every IaC module and IAM role the platform uses, and service vending, per cloud | Proof of concept; MVP scoped: GCP and AWS, the Builder vended first. Its first run on the real gates is open |
 
 The Reviewer agent and the separate fixer agents are retired: deterministic CI and per-ticket acceptance tests evaluate every change, and the Builder fixes its own.
 
@@ -107,21 +107,25 @@ No model provider checks its own output: the model that writes a change and the 
 ## ✅ Running Today
 
 - One central CI gate, called by commit SHA from every repository: secret scanning, Trivy, Semgrep, and per-stack lint, type checks, tests, coverage floors, and license policy. One severity rule for every scanner: CRITICAL or CISA KEV blocks, and the gate fails closed.
-- The gate tests itself. Fixture projects run the real gate on every change to it, and each check is shown to fail on the defect it guards against before it counts. A skipped job is not a pass.
+- The gate tests itself. Fixture projects run the real gate on every change to it, and each check is shown to fail on the defect it guards against before it counts.
+- A skipped job is not a pass, enforced: one Gates verdict check works out which gates had to run for the repository and fails unless every one succeeded, so each repository requires a single check.
+- Code quality in the gate: CRAP scoring first, then mutation testing with Stryker, decided by the Policy Engine. New functions need CRAP ≤ 15 and 80% coverage; nothing may get worse than its baseline.
+- Dependabot patch and minor updates merge on their own, and only after every required check passes; major updates and anything else stay with me.
 - Every service ships a container image: the gate builds it, runs its tests inside it unprivileged with no network, and scans it, and fails a repository that neither builds one nor says why it has none. Vulnerabilities are fixed at their source, not excepted.
 - Pinned inputs: images by digest, actions by commit SHA, downloaded tools by checksum, dependencies through committed lockfiles.
-- The Quality Policy Engine: its standard, contracts, and 54 test vectors in the playbook, and its decision core merged with 98 tests, 99% coverage, and every hand mutant killed.
+- The Quality Policy Engine: its standard, contracts, and 54 test vectors in the playbook, and its decision core with 98 tests, 99% coverage, and every hand mutant killed.
 - The CAPA register's controls run on every pull request, on `main`, and daily: a row for every journal entry, deadlines within their severity, overdue findings failing the daily run, and production readiness reported.
 
 ## 🔜 Now
 
-**A hard stop:** nothing more is built until mutation testing and CRAP scoring run in the central CI (mutmut, Stryker, the normalizer, then the Policy Engine wired into the gate). A factory that measures test quality should not grow while its own gate cannot.
+**Unclog the human in the loop.** I review and approve every merge, so anything that slows my part goes first: the agents open pull requests as their own GitHub App (its key held non-exportable in Cloud KMS), every repository requires the one Gates verdict, and CI runners boot from a baked image.
 
-Then operational safety: branch protection on the remaining factory repositories, alerts on failed deployments, automatic shutdown of idle compute, and a clean dev deployment.
+Then the orchestrator's two defects, found by fault injection and now fixed with tests (a Builder that never answers was re-dispatched without end; a stale attempt could push after a retry), and the consumers moving to the new gates.
 
 ## ⏭️ Next
 
 - **The factory loop on AWS:** the orchestrator, the open-weight Builder, and the event bus, carrying one ticket through CI to my approval.
+- **Genesis builds every cloud from one CI:** the central CI holds the logic once; the runner and the cloud identity are injected, so the same plan and apply reach GCP through Workload Identity Federation and AWS through OIDC roles. Genesis vends the Builder first.
 - **Continuous delivery:** every merge publishes an image by digest with an SBOM, a keyless signature, and SLSA provenance; promotion through human-approved merges; deploys admitted only through a deployment guard and Binary Authorization.
 
 ## 🗓️ Later
