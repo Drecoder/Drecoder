@@ -180,5 +180,5 @@ Then the CAPA journal runs itself: a failed gate, a red check on `main`, a Polic
 ## 🗓️ Later
 
 - **Autonomy by evidence:** a person leaves a step only when the measurements show the step is stable and better without them.
-- **The adaptive harness:** agents that choose their next step from reliability and quality evidence, without ever authorizing themselves. Proposed in the playbook, parked at review.
+- **The adaptive harness:** agents that choose their next step from reliability and quality evidence, without ever authorizing themselves. Proposed in the playbook; built in its own project, with the pentest platform.
 - **The learning loop:** each agent keeps its own journal and learns only from its own verified mistakes. The journal becomes a graph with risk weights that steer nothing until they are calibrated, and fine-tuning stays closed until it is decided as a protected change. [Proposed in the playbook](https://github.com/Drecoder/Engineering_Excellence_Playbook/blob/main/06_AgentZone/10_CAPA_Graph_and_Risk_Weighted_Learning.md); built as Run 2.
