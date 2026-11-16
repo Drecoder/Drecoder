@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1266 1111" width="1266" height="1111" font-family="-apple-system,Segoe UI,Helvetica,Arial,sans-serif">
+<rect width="100%" height="100%" fill="#171717"/>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto"><path d="M0,0 L5,5 L0,10" fill="none" stroke="#9a9a94" stroke-width="2"/></marker></defs>
+<rect x="794" y="34" width="438" height="970" rx="22" fill="#3d3487" stroke="#8b80e0"/>
+<text x="1013" y="100" text-anchor="middle" font-size="28" font-weight="700" fill="#dcd6ff">Features Map</text>
+<text x="1013" y="140" text-anchor="middle" font-size="21" fill="#c3baff">One row per F, KAN or #</text>
+<rect x="34" y="34" width="598" height="110" rx="12" fill="#474743" stroke="#8a8a84"/>
+<text x="333" y="80" text-anchor="middle" font-size="27" font-weight="700" fill="#e6e6e0">Work enters</text>
+<text x="333" y="120" text-anchor="middle" font-size="21" fill="#c9c9c2">Approved spec or CAPA finding</text>
+<line x1="634" y1="89" x2="792" y2="89" stroke="#77776f" stroke-dasharray="7 6"/>
+<line x1="333" y1="146" x2="333" y2="200" stroke="#9a9a94" stroke-width="2" marker-end="url(#a)"/>
+<rect x="34" y="206" width="598" height="110" rx="12" fill="#474743" stroke="#8a8a84"/>
+<text x="333" y="252" text-anchor="middle" font-size="27" font-weight="700" fill="#e6e6e0">Recorded</text>
+<text x="333" y="292" text-anchor="middle" font-size="21" fill="#c9c9c2">Backlog: KAN ticket, F row, journal</text>
+<line x1="634" y1="261" x2="792" y2="261" stroke="#77776f" stroke-dasharray="7 6"/>
+<line x1="333" y1="318" x2="333" y2="372" stroke="#9a9a94" stroke-width="2" marker-end="url(#a)"/>
+<rect x="34" y="378" width="598" height="110" rx="12" fill="#0b5142" stroke="#2fa588"/>
+<text x="333" y="424" text-anchor="middle" font-size="27" font-weight="700" fill="#bdf2df">Agent builds</text>
+<text x="333" y="464" text-anchor="middle" font-size="21" fill="#7fdcbc">Build: branch, local gate, PR, CI fix loop</text>
+<line x1="634" y1="433" x2="792" y2="433" stroke="#77776f" stroke-dasharray="7 6"/>
+<line x1="333" y1="490" x2="333" y2="544" stroke="#9a9a94" stroke-width="2" marker-end="url(#a)"/>
+<rect x="34" y="550" width="598" height="110" rx="12" fill="#0b5142" stroke="#2fa588"/>
+<text x="333" y="596" text-anchor="middle" font-size="27" font-weight="700" fill="#bdf2df">Central gates</text>
+<text x="333" y="636" text-anchor="middle" font-size="21" fill="#7fdcbc">CI decides, never the agent; PASS → Awaiting Approval</text>
+<line x1="634" y1="605" x2="792" y2="605" stroke="#77776f" stroke-dasharray="7 6"/>
+<line x1="333" y1="662" x2="333" y2="716" stroke="#9a9a94" stroke-width="2" marker-end="url(#a)"/>
+<rect x="34" y="722" width="598" height="110" rx="12" fill="#722b12" stroke="#d9774f"/>
+<text x="333" y="768" text-anchor="middle" font-size="27" font-weight="700" fill="#ffd9c8">Owner review</text>
+<text x="333" y="808" text-anchor="middle" font-size="21" fill="#f5a986">Human: decide, approve, merge</text>
+<line x1="634" y1="777" x2="792" y2="777" stroke="#77776f" stroke-dasharray="7 6"/>
+<line x1="333" y1="834" x2="333" y2="888" stroke="#9a9a94" stroke-width="2" marker-end="url(#a)"/>
+<rect x="34" y="894" width="598" height="110" rx="12" fill="#474743" stroke="#8a8a84"/>
+<text x="333" y="940" text-anchor="middle" font-size="27" font-weight="700" fill="#e6e6e0">Verified and closed</text>
+<text x="333" y="980" text-anchor="middle" font-size="21" fill="#c9c9c2">Done: merged, and the register says fixed</text>
+<line x1="634" y1="949" x2="792" y2="949" stroke="#77776f" stroke-dasharray="7 6"/>
+<text x="834" y="268" font-size="22" fill="#c3baff">Who: Owner or Agent</text>
+<text x="834" y="440" font-size="22" fill="#c3baff">Status mirrors the board</text>
+<text x="834" y="612" font-size="22" fill="#c3baff">Synced every session</text>
+<text x="834" y="784" font-size="22" fill="#c3baff">Cited in every handoff</text>
+<text x="834" y="936" font-size="22" fill="#c3baff">Drift fixed on sight</text>
+<text x="834" y="972" font-size="22" fill="#c3baff">(Work Tracking Rules, F-0099)</text>
+<rect x="34" y="1049" width="28" height="28" rx="5" fill="#0b5142" stroke="#2fa588"/><text x="78" y="1072" font-size="23" fill="#d6d6d0">Agent acts</text>
+<rect x="254" y="1049" width="28" height="28" rx="5" fill="#722b12" stroke="#d9774f"/><text x="298" y="1072" font-size="23" fill="#d6d6d0">Owner acts</text>
+<rect x="474" y="1049" width="28" height="28" rx="5" fill="#474743" stroke="#8a8a84"/><text x="518" y="1072" font-size="23" fill="#d6d6d0">Record keeping</text>
+</svg>
