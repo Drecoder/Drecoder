@@ -113,14 +113,31 @@ PHASES
   1 Orchestrator  █████░░░░░░░░░░░░░░░   8/30    two proven defects fixed, tested and merged
   2 Builder + CI  ████████████░░░░░░░░  15/25    ◂ here: a manifest now merges only with its lockfile; runner image next
   3 Journal loop  ████░░░░░░░░░░░░░░░░   3.5/20  findings start as tracked issues; the projector is in review
-  4 Harness       █░░░░░░░░░░░░░░░░░░░   1/15    proposed; continues in its own project
+  4 Harness       █░░░░░░░░░░░░░░░░░░░   1/15    proposed; its conformance test design is in review
 ```
+
+The overall roadmap, scored against the whole playbook (a separate measure from the MVP score above):
+
+```text
+PLAYBOOK SCORE (0–100)
+  baseline Oct 28   ████████████████████████░░░░░░░░░░░░░░░░   61
+  formal Nov 6      ████████████████████░░░░░░░░░░░░░░░░░░░░   50  ◂ last re-grade: only what runs on main
+  PI-1 PoC          ████████████████████████████░░░░░░░░░░░░   70  notepad, event handoff, consumers repinned, golden tasks, SLOs
+  PI-2 Pilot        ██████████████████████████████████░░░░░░   85  branch protection, signed releases, bootstrap apply, live telemetry
+  bar               ████████████████████████████████████░░░░   90
+  PI-3 Production   ████████████████████████████████████░░░░   91  Genesis green, verified deploys, governance closed
+  PI-4 Scale        █████████████████████████████████████░░░  ≥93  autonomy promoted per class on evidence
+```
+
+After the MVP come the factory runs in order (FinOps, MLOps, Agentic SecOps, the pentest platform), each one starting only when the run before it reaches its MVP.
 
 Since Nov 11: rulesets protect eight of the factory's repositories, two repositories require only the Gates verdict, Dependabot auto-merge is on, and the orchestrator's two fault-injection defects are fixed and merged. The CRAP gate also blocked a real regression in an agent-written fix before merge, the first time it caught one outside a test fixture.
 
 Since then, the guardrail for the one open critical finding is merged: auto-merge refuses a dependency manifest that arrives without its lockfile. The finding closes once the two affected repositories repin to it, before its Nov 23 deadline.
 
 Three things went the other way. Auto-merge let a dependency bump through without its lockfile; that is the critical finding above. The CI runner pool sat at zero for four days with nothing to tell me, which is why runners that scale from zero on demand, with a queued-job alert, are in review. And the workflow that bakes the runners' image merged without ever running its real path, so it could not succeed; the fix is in review. All three are findings with deadlines.
+
+Also in review since then: one board workflow for all work, development and CAPA alike, so every finding and every change has a ticket before the work starts; and a Features Map per repository, generated from its code, its gates and its findings, with a gate that fails when the map no longer matches the code. One Features Map sheet carries every repository's features, the board, the MVP phases and the roadmap above, synced daily.
 
 Next, in order: close the critical finding; the baked runner image and on-demand runners; the CAPA projector, then its first detector, so a failing control opens its own finding; the agents open pull requests as their own GitHub App, because my review is the loop's bottleneck; then the first dry run of one ticket through the loop.
 
