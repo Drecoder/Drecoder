@@ -100,6 +100,10 @@ Progress is scored from evidence against the playbook. Baseline 61 (Oct 28); the
 
 ## 🗺️ Roadmap
 
+🧭 **[Features Map](https://claude.ai/artifact/NpwCvBoUaFQ6KPqoUaPZr5)** (private to me): my to-do list, the MVP phases, the roadmap, every open item across the factory's repositories, and the board, synced daily. Development work and CAPA findings move through one board workflow, and the map mirrors it:
+
+![One board workflow for all work, mirrored by the Features Map](images/board-workflow.svg)
+
 Where the MVP stands (Nov 16), scored from what is merged and running:
 
 ```text
@@ -113,7 +117,7 @@ PHASES
   1 Orchestrator  █████░░░░░░░░░░░░░░░   8/30    two proven defects fixed, tested and merged
   2 Builder + CI  ████████████░░░░░░░░  15/25    ◂ here: a manifest now merges only with its lockfile; runner image next
   3 Journal loop  ████░░░░░░░░░░░░░░░░   3.5/20  findings start as tracked issues; the projector is in review
-  4 Harness       █░░░░░░░░░░░░░░░░░░░   1/15    proposed; its conformance test design is in review
+  4 Harness       █░░░░░░░░░░░░░░░░░░░   1/15    proposed; its conformance tests are merged
 ```
 
 The overall roadmap, scored against the whole playbook (a separate measure from the MVP score above):
