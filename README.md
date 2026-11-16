@@ -6,7 +6,7 @@ I'm building a software factory: AI agents that turn an approved requirement int
 
 The rule I hold myself to: a standard counts only when it is enforced and running, not when it is written down.
 
-📓 **[Proof journal](https://github.com/Drecoder/Engineering_Excellence_Playbook/blob/main/docs/POC_JOURNAL.md):** what applying the playbook actually found while building the factory, each finding written up as a CAPA post-mortem (problem, root cause, correction, preventive action, verification), including the ones still open. CI enforces append-only on every pull request, on `main`, and daily. A CAPA register ranks every finding by severity with a mandatory deadline (critical 7 days, high 30, medium 90, low 180), measures how many controls are proven to fail on their defect, and keeps production readiness false while any critical or high security or governance finding is open.
+📓 **[Proof journal](https://github.com/Drecoder/Engineering_Excellence_Playbook/blob/main/docs/POC_JOURNAL.md):** what applying the playbook actually found while building the factory, each finding written up as a CAPA post-mortem (problem, root cause, correction, preventive action, verification), including the ones still open. CI enforces append-only on every pull request, on `main`, and daily. Since Nov 16, every finding starts as a tracked issue whose number is its ID, and the journal and register are projected from those issues. A CAPA register ranks every finding by severity with a mandatory deadline (critical 7 days, high 30, medium 90, low 180), measures how many controls are proven to fail on their defect, and keeps production readiness false while any critical or high security or governance finding is open.
 
 ## 🏛️ The Architecture
 
@@ -26,10 +26,11 @@ At a glance it is a software factory. Underneath, every loop produces measured e
 | Closed loop | Designed | Running today |
 | --- | --- | --- |
 | Quality: CRAP, then mutation, decided by the Policy Engine | ✅ | ✅ in the central CI; repositories moving onto it |
-| A skipped gate is never a pass: the Gates verdict | ✅ | ✅ merged; rulesets switching to it |
+| A skipped gate is never a pass: the Gates verdict | ✅ | ✅ required by two repositories; the rest follow |
 | Build, CI, fix: the Builder's loop | ✅ | ⏳ first dry run next |
 | Autonomy by evidence: promote and demote on measurements | ✅ | ⏳ the evidence loop for auto-merged updates is next |
 | Cost into budgets as gates (FinOps) | ✅ proposed | Run 1 |
+| CAPA intake: a failing control opens its own finding | ✅ | ⏳ findings are tracked issues today; detectors next |
 | CAPA records into institutional learning (MLOps) | ✅ proposed | Run 2 |
 | Security events into investigated, verified responses (SecOps) | ✅ proposed | Run 3 |
 
@@ -97,23 +98,27 @@ Progress is scored from evidence against the playbook. Baseline 61 (Oct 28); the
 
 ## 🗺️ Roadmap
 
-Where the MVP stands (Nov 11), scored from what is merged and running:
+Where the MVP stands (Nov 16), scored from what is merged and running:
 
 ```text
 MVP
-  now         ████████████████████████░░░░░░░░░░░░░░░░  ~60
+  now         █████████████████████████░░░░░░░░░░░░░░░  ~62
   1st dry run █████████████████████████████░░░░░░░░░░░  ~73
   MVP         ████████████████████████████████████████  100
 
 PHASES
-  0 Unblock       ███████████████░░░░░   7.5/10  auto-merge merged; rulesets and the agents' own GitHub App left
-  1 Orchestrator  ████░░░░░░░░░░░░░░░░   6/30    two proven defects fixed and tested, not yet merged
-  2 Builder + CI  ███████████░░░░░░░░░  13/25    ◂ here: CRAP, mutation and the Policy Engine run in the central gate
-  3 Journal loop  ███░░░░░░░░░░░░░░░░░   3/20    designed; continues in its own project
+  0 Unblock       █████████████████░░░   8.5/10  rulesets on eight repositories; the agents' own GitHub App left
+  1 Orchestrator  █████░░░░░░░░░░░░░░░   8/30    two proven defects fixed, tested and merged
+  2 Builder + CI  ███████████░░░░░░░░░  14/25    ◂ here: repositories moving onto the Gates verdict; auto-merge on
+  3 Journal loop  ████░░░░░░░░░░░░░░░░   3.5/20  findings now start as tracked issues; detection still by hand
   4 Harness       █░░░░░░░░░░░░░░░░░░░   1/15    proposed; continues in its own project
 ```
 
-The hard stop is lifted: CRAP scoring and mutation testing run in the central CI, CRAP first, through the Policy Engine. Next, in order: the agents open pull requests as their own GitHub App, because my review is the loop's bottleneck; the orchestrator's fixes; then the first dry run of one ticket through the loop.
+Since Nov 11: rulesets protect eight of the factory's repositories, two repositories require only the Gates verdict, Dependabot auto-merge is on, and the orchestrator's two fault-injection defects are fixed and merged. The CRAP gate also blocked a real regression in an agent-written fix before merge, the first time it caught one outside a test fixture.
+
+Two things went the other way. Auto-merge let a dependency bump through without its lockfile; that is the one open critical finding, and its guardrail is in review. And the CI runner pool sat at zero for four days with nothing to tell me. Both are recorded as findings with deadlines, and the second is why the next CI change is a queued-job alert, then runners that scale from zero on demand.
+
+Next, in order: close the critical finding; automate the CAPA journal, so a failing control opens its own finding; the agents open pull requests as their own GitHub App, because my review is the loop's bottleneck; then the first dry run of one ticket through the loop.
 
 ## 📘 The Playbook
 
@@ -162,7 +167,7 @@ No model provider checks its own output: the model that writes a change and the 
 
 **Unclog the human in the loop.** I review and approve every merge, so anything that slows my part goes first: the agents open pull requests as their own GitHub App (its key held non-exportable in Cloud KMS), every repository requires the one Gates verdict, and CI runners boot from a baked image.
 
-Then the orchestrator's two defects, found by fault injection and now fixed with tests (a Builder that never answers was re-dispatched without end; a stale attempt could push after a retry), and the consumers moving to the new gates.
+Then the CAPA journal runs itself: a failed gate, a red check on `main`, a Policy Engine block or a job queued too long opens its own finding, and the journal is projected from the findings in one batched change I approve. The orchestrator's two fault-injection defects (a Builder that never answers was re-dispatched without end; a stale attempt could push after a retry) are fixed and merged.
 
 ## ⏭️ Next
 
