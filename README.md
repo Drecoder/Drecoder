@@ -100,7 +100,9 @@ Progress is scored from evidence against the playbook. Baseline 61 (Oct 28); the
 
 ## 🗺️ Roadmap
 
-🧭 **[Features Map](https://claude.ai/artifact/NpwCvBoUaFQ6KPqoUaPZr5)** (private to me): my to-do list, the MVP phases, the roadmap, every open item across the factory's repositories, and the board, synced daily.
+🧭 **[Features Map](https://claude.ai/artifact/NpwCvBoUaFQ6KPqoUaPZr5)** (private to me): my to-do list, the MVP phases, the roadmap, every open item across the factory's repositories, and the board, synced daily. Development work and CAPA findings move through one board workflow, and the map mirrors it:
+
+![One board workflow for all work, mirrored by the Features Map](images/board-workflow.svg)
 
 Where the MVP stands (Nov 16), scored from what is merged and running:
 
