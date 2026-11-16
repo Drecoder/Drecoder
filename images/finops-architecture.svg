@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" width="1000" height="560" role="img" aria-labelledby="t d">
+  <title id="t">FinOps pattern: Databricks cost telemetry, optimization and closed-loop control</title>
+  <desc id="d">Host platforms send billing and usage through the DataOps pipe into a Medallion lakehouse. Three layers act on it: Inform attributes spend to owners, Optimize right-sizes compute and storage, and Operate and control turns budgets and tag rules into gates that feed back to the software factory and the CAPA loop.</desc>
+  <style>
+    .bg{fill:#15181d}.f{fill:none;stroke:#3a3f47;stroke-width:1.2;stroke-dasharray:6 5}
+    text{font-family:"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif}
+    .h{fill:#f1efe8;font-size:22px;font-weight:600}.c{fill:#b4b2a9;font-size:15px}
+    .b1{fill:#3c3489;stroke:#7f77dd}.b2{fill:#085041;stroke:#1d9e75}.b3{fill:#633806;stroke:#ef9f27}.b0{fill:#3a3a38;stroke:#888780}
+    .t{fill:#f1efe8;font-size:17px;font-weight:600}.s{fill:#d3d1c7;font-size:13px}
+    .a{stroke:#b4b2a9;stroke-width:1.5;fill:none}.n{fill:#d3d1c7;font-size:14px}
+  </style>
+  <defs><marker id="m" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#b4b2a9" stroke-width="1.6"/></marker></defs>
+  <rect class="bg" width="1000" height="560"/>
+  <text class="h" x="40" y="50">FinOps · Databricks</text>
+  <text class="c" x="40" y="74">cost telemetry, workload optimization, closed-loop control — attached to any factory platform</text>
+
+  <rect class="b0" x="40" y="110" width="200" height="90" rx="10"/>
+  <text class="t" x="140" y="142" text-anchor="middle">Host platforms</text>
+  <text class="s" x="140" y="164" text-anchor="middle">token ledger · AWS + GCP</text>
+  <text class="s" x="140" y="182" text-anchor="middle">billing exports (FOCUS)</text>
+
+  <rect class="b0" x="290" y="110" width="200" height="90" rx="10"/>
+  <text class="t" x="390" y="142" text-anchor="middle">DataOps pipe</text>
+  <text class="s" x="390" y="164" text-anchor="middle">validate · normalize · resolve IDs</text>
+  <text class="s" x="390" y="182" text-anchor="middle">Bronze → Silver → Gold</text>
+
+  <rect class="b0" x="540" y="110" width="420" height="90" rx="10"/>
+  <text class="t" x="750" y="142" text-anchor="middle">Lakehouse · Unity Catalog system tables</text>
+  <text class="s" x="750" y="164" text-anchor="middle">system.billing.usage · list_prices · compute.* · lakeflow.* · access.audit</text>
+  <text class="s" x="750" y="182" text-anchor="middle">joined on workspace, cluster, job, run, warehouse IDs</text>
+
+  <line class="a" x1="242" y1="155" x2="288" y2="155" marker-end="url(#m)"/>
+  <line class="a" x1="492" y1="155" x2="538" y2="155" marker-end="url(#m)"/>
+
+  <rect class="b1" x="40" y="250" width="290" height="150" rx="10"/>
+  <text class="t" x="185" y="282" text-anchor="middle">A · Inform</text>
+  <text class="s" x="185" y="308" text-anchor="middle">every unit of spend attributed to an owner</text>
+  <text class="s" x="185" y="330" text-anchor="middle">DBUs → dollars · cross-account federation</text>
+  <text class="s" x="185" y="352" text-anchor="middle">mandatory cost-attribution tags</text>
+  <text class="s" x="185" y="374" text-anchor="middle">unallocated-spend alerts</text>
+
+  <rect class="b2" x="355" y="250" width="290" height="150" rx="10"/>
+  <text class="t" x="500" y="282" text-anchor="middle">B · Optimize</text>
+  <text class="s" x="500" y="308" text-anchor="middle">auto stop · serverless · scale to zero</text>
+  <text class="s" x="500" y="330" text-anchor="middle">spot for fault-tolerant batch and builders</text>
+  <text class="s" x="500" y="352" text-anchor="middle">pipeline cadence · query efficiency</text>
+  <text class="s" x="500" y="374" text-anchor="middle">table maintenance · retire unused data</text>
+
+  <rect class="b3" x="670" y="250" width="290" height="150" rx="10"/>
+  <text class="t" x="815" y="282" text-anchor="middle">C · Operate &amp; control</text>
+  <text class="s" x="815" y="308" text-anchor="middle">budgets and tag rules become gates</text>
+  <text class="s" x="815" y="330" text-anchor="middle">per-ticket budget: flag 80%, stop 100%</text>
+  <text class="s" x="815" y="352" text-anchor="middle">overrun stops new spend for the owner</text>
+  <text class="s" x="815" y="374" text-anchor="middle">outcomes become CAPA records</text>
+
+  <line class="a" x1="750" y1="202" x2="750" y2="226"/>
+  <line class="a" x1="185" y1="226" x2="815" y2="226"/>
+  <line class="a" x1="185" y1="226" x2="185" y2="248" marker-end="url(#m)"/>
+  <line class="a" x1="500" y1="226" x2="500" y2="248" marker-end="url(#m)"/>
+  <line class="a" x1="815" y1="226" x2="815" y2="248" marker-end="url(#m)"/>
+
+  <path class="a" d="M 815 402 L 815 450 L 22 450 L 22 155 L 38 155" marker-end="url(#m)"/>
+  <text class="n" x="478" y="442" text-anchor="middle">feedback: gates to the factory · lessons to the CAPA loop</text>
+
+  <text class="n" x="500" y="510" text-anchor="middle">Compute runs only when called; the FinOps compute itself is serverless and idles at zero.</text>
+</svg>

@@ -19,6 +19,48 @@ The factory separates the ability to reason about, propose, and build a change f
 - **GitHub is the seam.** Agents hold no identity in the execution plane; they reach it only by opening a pull request. Required checks, CODEOWNERS, and protected branches decide what gets through, and I approve every merge.
 - **Agents produce claims, never evidence.** Only results signed by CI's identity count as evidence. Anything an agent reports about its own work stays a claim.
 
+## 🧪 A Software Factory That Operates as an AI Lab
+
+At a glance it is a software factory. Underneath, every loop produces measured evidence (CAPA records, mutation scores, autonomy events, cost per ticket), and the system changes how it behaves only on that evidence. That is what makes it a lab. It becomes one loop at a time, and a loop counts only once it is closed and running:
+
+| Closed loop | Designed | Running today |
+| --- | --- | --- |
+| Quality: CRAP, then mutation, decided by the Policy Engine | ✅ | ✅ in the central CI; repositories moving onto it |
+| A skipped gate is never a pass: the Gates verdict | ✅ | ✅ merged; rulesets switching to it |
+| Build, CI, fix: the Builder's loop | ✅ | ⏳ first dry run next |
+| Autonomy by evidence: promote and demote on measurements | ✅ | ⏳ the evidence loop for auto-merged updates is next |
+| Cost into budgets as gates (FinOps) | ✅ proposed | Run 1 |
+| CAPA records into institutional learning (MLOps) | ✅ proposed | Run 2 |
+| Security events into investigated, verified responses (SecOps) | ✅ proposed | Run 3 |
+
+### Patterns that attach to every platform the factory builds
+
+FinOps, MLOps and SecOps are written once and attached to any platform the factory produces, the factory itself first, through one versioned contract each. **DataOps** is the shared pipe beneath them: ingest, validate against versioned contracts (rejected, never repaired), normalize, resolve IDs, and land in Bronze, Silver and Gold. The patterns read Gold only. ([Platform patterns in the playbook](https://github.com/Drecoder/Engineering_Excellence_Playbook/blob/main/07_SoftwareFactory/02_Platform_Patterns.md), proposed.)
+
+**FinOps on Databricks:** every unit of spend attributed to an owner, workloads right-sized, and budgets turned into gates.
+
+![FinOps pattern: host platforms through the DataOps pipe into a Databricks lakehouse, then Inform, Optimize, and Operate and control, feeding gates back to the factory](images/finops-architecture.svg)
+
+**MLOps, CAPA journal to institutional learning:** the journal captures experience, DataOps structures it, a knowledge graph and a vector index make it retrievable, and verified results become new CAPA records. Retrieval comes first; fine-tuning stays closed until it is decided as a protected change.
+
+![CAPA journal to institutional learning: operations, CAPA journal, DataOps, knowledge graph and vector index, hybrid retrieval, MLOps, improved engineering decisions](images/capa-institutional-learning.png)
+
+**Agentic SecOps:** a cloud-portable incident-response pattern (detect, contextualize, decide, execute, verify) on AWS and GCP. Remediation is a protected class: I approve every remediating action, on every platform it attaches to.
+
+![Agentic SecOps: event-driven security incident response across AWS and GCP with a shared control plane](images/agentic-secops.png)
+
+### The factory runs
+
+Each pattern is built by the factory itself, as a run at the MVP stage: approved specs, acceptance tests first, the central gates, my approved merges, and a metered budget per ticket. No run starts before the one it depends on reaches its MVP.
+
+| Run | Builds | Depends on |
+| --- | --- | --- |
+| 0 | The factory's own MVP: one real ticket, gated, approved, merged, within budget | |
+| 1 | DataOps pipe, then FinOps, attached to the factory | Run 0 |
+| 2 | MLOps: CAPA to institutional learning | Run 1 |
+| 3 | Agentic SecOps, attached to the factory | Runs 1 and 2 |
+| 4 | The pentest platform, rebuilt through the factory with SecOps attached | Run 3 |
+
 ## 🎯 The Goals
 
 Not a bigger factory: a smaller one that is complete and independently verifiable. No new features until the first complete release path is proven.
@@ -132,4 +174,4 @@ Then the orchestrator's two defects, found by fault injection and now fixed with
 
 - **Autonomy by evidence:** a person leaves a step only when the measurements show the step is stable and better without them.
 - **The adaptive harness:** agents that choose their next step from reliability and quality evidence, without ever authorizing themselves. Proposed in the playbook, parked at review.
-- **The learning loop:** each agent keeps its own journal and learns only from its own verified mistakes. The journal becomes a graph with risk weights that steer nothing until they are calibrated, and fine-tuning stays closed until it is decided as a protected change. [Proposed in the playbook](https://github.com/Drecoder/Engineering_Excellence_Playbook/blob/main/06_AgentZone/10_CAPA_Graph_and_Risk_Weighted_Learning.md).
+- **The learning loop:** each agent keeps its own journal and learns only from its own verified mistakes. The journal becomes a graph with risk weights that steer nothing until they are calibrated, and fine-tuning stays closed until it is decided as a protected change. [Proposed in the playbook](https://github.com/Drecoder/Engineering_Excellence_Playbook/blob/main/06_AgentZone/10_CAPA_Graph_and_Risk_Weighted_Learning.md); built as Run 2.
