@@ -6,7 +6,7 @@ I'm building a software factory: AI agents that turn an approved requirement int
 
 The rule I hold myself to: a standard counts only when it is enforced and running, not when it is written down.
 
-📓 **[Proof journal](https://github.com/Drecoder/Engineering_Excellence_Playbook/blob/main/docs/POC_JOURNAL.md):** what applying the playbook actually found while building the factory, each finding written up as a CAPA post-mortem (problem, root cause, correction, preventive action, verification), including the ones still open. CI enforces append-only on every pull request, on `main`, and daily. Since Nov 16, every finding starts as a tracked issue whose number is its ID, and the journal and register are projected from those issues (by hand until the projector, now in review, lands). A CAPA register ranks every finding by severity with a mandatory deadline (critical 7 days, high 30, medium 90, low 180), measures how many controls are proven to fail on their defect, and keeps production readiness false while any critical or high security or governance finding is open.
+📓 **[Proof journal](https://github.com/Drecoder/Engineering_Excellence_Playbook/blob/main/docs/POC_JOURNAL.md):** what applying the playbook actually found while building the factory, each finding written up as a CAPA post-mortem (problem, root cause, correction, preventive action, verification), including the ones still open. CI enforces append-only on every pull request, on `main`, and daily. Since Nov 16, every finding starts as a tracked issue whose number is its ID, and the journal and register are projected from those issues by a projector, never written by hand (its check in CI is in review). Before the agent diagnoses any work, it reads the findings that apply to it and commits what it learned; CI refuses a change whose record leaves one out. A CAPA register ranks every finding by severity with a mandatory deadline (critical 7 days, high 30, medium 90, low 180), measures how many controls are proven to fail on their defect, and keeps production readiness false while any critical or high security or governance finding is open.
 
 🧰 **[agent-ddi-harness](https://github.com/Drecoder/agent-ddi-harness)** (open source, MIT): a local-first DDI/EEP pre-push harness for agents and CLI workflows. One loop runs on every `git push`: it scopes the change, ranks the playbook-style rules that apply, enforces the machine-checkable ones, runs CRAP, then mutation, then the TDD pyramid on the exact pushed commit, and turns every failure into a structured CAPA or merge-conflict draft. Everything it writes stays an unverified claim until CI signs the result. Python and git only, no cloud and no keys; it gates its own pushes. A reference implementation of Domain-Driven Intelligence (DDI): DDD, TDD, and event-, error- and evidence-driven development governing how agents work.
 
@@ -32,7 +32,8 @@ At a glance it is a software factory. Underneath, every loop produces measured e
 | Build, CI, fix: the Builder's loop | ✅ | ⏳ first dry run next |
 | Autonomy by evidence: promote and demote on measurements | ✅ | ⏳ the evidence loop for auto-merged updates is next |
 | Cost into budgets as gates (FinOps) | ✅ proposed | Run 1 |
-| CAPA intake: a failing control opens its own finding | ✅ | ⏳ findings are tracked issues; the projector is in review, detectors next |
+| CAPA intake: a failing control opens its own finding | ✅ | ⏳ findings are tracked issues, projected into the journal; detectors next |
+| Feedback: the agent reads its own findings before it diagnoses | ✅ | ✅ enforced on the playbook's pull requests; the central gate next |
 | CAPA records into institutional learning (MLOps) | ✅ proposed | Run 2 |
 | Security events into investigated, verified responses (SecOps) | ✅ proposed | Run 3 |
 
@@ -104,7 +105,7 @@ Progress is scored from evidence against the playbook. Baseline 61 (Oct 28); the
 
 ![One board workflow for all work, mirrored by the Features Map](images/board-workflow.svg)
 
-Where the MVP stands (Nov 16), scored from what is merged and running:
+Where the MVP stands (scored Nov 16, not re-scored since), from what is merged and running:
 
 ```text
 MVP
@@ -113,10 +114,10 @@ MVP
   MVP         ████████████████████████████████████████  100
 
 PHASES
-  0 Unblock       █████████████████░░░   8.5/10  rulesets on eight repositories; the agents' own GitHub App left
+  0 Unblock       █████████████████░░░   8.5/10  rulesets on eight repositories; the agents' GitHub App: identity merged, workflow next
   1 Orchestrator  █████░░░░░░░░░░░░░░░   8/30    two proven defects fixed, tested and merged
-  2 Builder + CI  ████████████░░░░░░░░  15/25    ◂ here: a manifest now merges only with its lockfile; runner image next
-  3 Journal loop  ████░░░░░░░░░░░░░░░░   3.5/20  findings start as tracked issues; the projector is in review
+  2 Builder + CI  ████████████░░░░░░░░  15/25    ◂ here: runners boot from a baked image and scale from zero on their own
+  3 Journal loop  ████░░░░░░░░░░░░░░░░   3.5/20  findings projected from issues; the agent reads its history first
   4 Harness       █░░░░░░░░░░░░░░░░░░░   1/15    proposed; its conformance tests are merged
 ```
 
@@ -137,13 +138,11 @@ After the MVP come the factory runs in order (FinOps, MLOps, Agentic SecOps, the
 
 Since Nov 11: rulesets protect eight of the factory's repositories, two repositories require only the Gates verdict, Dependabot auto-merge is on, and the orchestrator's two fault-injection defects are fixed and merged. The CRAP gate also blocked a real regression in an agent-written fix before merge, the first time it caught one outside a test fixture.
 
-Since then, the guardrail for the one open critical finding is merged: auto-merge refuses a dependency manifest that arrives without its lockfile. The finding closes once the two affected repositories repin to it, before its Nov 23 deadline.
+Since then, the critical finding from that week is fixed: both affected repositories repinned to the guardrail, so auto-merge refuses a dependency manifest that arrives without its lockfile. The CI runners now boot from a baked image and scale from zero on their own, sized from the job queue, with an alert when a job waits too long or the scaler goes quiet. On Nov 17 the pool emptied itself and came back when work arrived, with no one resizing it. One board workflow for all work, development and CAPA alike, and the CAPA projector are merged. A Features Map per repository, generated from its code, its gates and its findings, with a gate that fails when the map no longer matches the code, is in review; one Features Map sheet carries every repository's features, the board, the MVP phases and the roadmap above, synced daily.
 
-Three things went the other way. Auto-merge let a dependency bump through without its lockfile; that is the critical finding above. The CI runner pool sat at zero for four days with nothing to tell me, which is why runners that scale from zero on demand, with a queued-job alert, are in review. And the workflow that bakes the runners' image merged without ever running its real path, so it could not succeed; the fix is in review. All three are findings with deadlines.
+One thing went the other way, and it was caught within the hour. The change that brought the scaler also rewrote a cloud trust condition, and an operator-precedence slip left the owner and repository pins on only one of its three CI identities; the two it left unpinned included the one that applies infrastructure. It was live for about 51 minutes before the agent read it in my apply output. The fix, a check I now run on every identity plan before applying it, and the journal entry (critical, fixed, with what is still unproven stated) all landed the same day.
 
-Also in review since then: one board workflow for all work, development and CAPA alike, so every finding and every change has a ticket before the work starts; and a Features Map per repository, generated from its code, its gates and its findings, with a gate that fails when the map no longer matches the code. One Features Map sheet carries every repository's features, the board, the MVP phases and the roadmap above, synced daily.
-
-Next, in order: close the critical finding; the baked runner image and on-demand runners; the CAPA projector, then its first detector, so a failing control opens its own finding; the agents open pull requests as their own GitHub App, because my review is the loop's bottleneck; then the first dry run of one ticket through the loop.
+Next, in order: the agents open pull requests as their own GitHub App (its signing identity is merged; the workflow is next), because my review is the loop's bottleneck; the orchestrator carrying one ticket end to end; the Builder; then the first dry run of one ticket through the loop.
 
 ## 📘 The Playbook
 
@@ -186,13 +185,14 @@ No model provider checks its own output: the model that writes a change and the 
 - Every service ships a container image: the gate builds it, runs its tests inside it unprivileged with no network, and scans it, and fails a repository that neither builds one nor says why it has none. Vulnerabilities are fixed at their source, not excepted.
 - Pinned inputs: images by digest, actions by commit SHA, downloaded tools by checksum, dependencies through committed lockfiles.
 - The Quality Policy Engine: its standard, contracts, and 54 test vectors in the playbook, and its decision core with 98 tests, 99% coverage, and every hand mutant killed.
+- CI runners scale from zero: a scaler sizes the pool from the job queue every few minutes, on Spot VMs booting from a baked image, and alerts when a job waits over 15 minutes.
 - The CAPA register's controls run on every pull request, on `main`, and daily: a row for every journal entry, deadlines within their severity, overdue findings failing the daily run, and production readiness reported.
 
 ## 🔜 Now
 
-**Unclog the human in the loop.** I review and approve every merge, so anything that slows my part goes first: the agents open pull requests as their own GitHub App (its key held non-exportable in Cloud KMS), every repository requires the one Gates verdict, and CI runners boot from a baked image and scale from zero only when work is queued.
+**Unclog the human in the loop.** I review and approve every merge, so anything that slows my part goes first: the agents open pull requests as their own GitHub App (its key held non-exportable in Cloud KMS), every repository requires the one Gates verdict, and CI runners boot from a baked image and scale from zero only when work is queued (running since Nov 17).
 
-Then the CAPA journal runs itself: a failed gate, a red check on `main`, a Policy Engine block or a job queued too long opens its own finding, and the journal is projected from the findings in one batched change I approve. The projector is in review; the first detector follows it.
+Then the CAPA journal runs itself: a failed gate, a red check on `main`, a Policy Engine block or a job queued too long opens its own finding, and the journal is projected from the findings in one batched change I approve. The projector is merged and the agent reads its own findings before it diagnoses; the first detector follows.
 
 ## ⏭️ Next
 
