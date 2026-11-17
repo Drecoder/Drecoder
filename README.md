@@ -105,19 +105,19 @@ Progress is scored from evidence against the playbook. Baseline 61 (Oct 28); the
 
 ![One board workflow for all work, mirrored by the Features Map](images/board-workflow.svg)
 
-Where the MVP stands (scored Nov 16, not re-scored since), from what is merged and running:
+Where the MVP stands (re-scored Nov 17), from what is merged and running:
 
 ```text
 MVP
-  now         █████████████████████████░░░░░░░░░░░░░░░  ~63
+  now         ███████████████████████████░░░░░░░░░░░░░  ~68   (was ~63 on Nov 16)
   1st dry run █████████████████████████████░░░░░░░░░░░  ~73
   MVP         ████████████████████████████████████████  100
 
 PHASES
-  0 Unblock       █████████████████░░░   8.5/10  rulesets on eight repositories; the agents' GitHub App: identity merged, workflow next
+  0 Unblock       ██████████████████░░   9/10    rulesets on eight repositories; the agents' GitHub App: key in KMS, identity merged, workflow next
   1 Orchestrator  █████░░░░░░░░░░░░░░░   8/30    two proven defects fixed, tested and merged
-  2 Builder + CI  ████████████░░░░░░░░  15/25    ◂ here: runners boot from a baked image and scale from zero on their own
-  3 Journal loop  ████░░░░░░░░░░░░░░░░   3.5/20  findings projected from issues; the agent reads its history first
+  2 Builder + CI  ██████████████░░░░░░  17/25    ◂ here: runners boot from a baked image and scale from zero on their own
+  3 Journal loop  ██████░░░░░░░░░░░░░░   6/20    findings projected from issues; the agent reads its history first
   4 Harness       █░░░░░░░░░░░░░░░░░░░   1/15    proposed; its conformance tests are merged
 ```
 
