@@ -105,20 +105,20 @@ Progress is scored from evidence against the playbook. Baseline 61 (Oct 28); the
 
 ![One board workflow for all work, mirrored by the Features Map](images/board-workflow.svg)
 
-Where the MVP stands (scored Nov 16, not re-scored since), from what is merged and running:
+Where the MVP stands (re-scored Nov 17), from what is merged and running:
 
 ```text
 MVP
-  now         █████████████████████████░░░░░░░░░░░░░░░  ~63
-  1st dry run █████████████████████████████░░░░░░░░░░░  ~73
+  now         ███████████████████████████████░░░░░░░░░  ~78   (was ~63 on Nov 16)
+  1st dry run █████████████████████████████░░░░░░░░░░░  ~73   ◂ score passed; the run itself waits on Phase 1
   MVP         ████████████████████████████████████████  100
 
 PHASES
-  0 Unblock       █████████████████░░░   8.5/10  rulesets on eight repositories; the agents' GitHub App: identity merged, workflow next
+  0 Unblock       ██████████████████░░   9/10    rulesets on eight repositories; the agents' GitHub App: key in KMS, identity applied, workflow merged; first App PR next
   1 Orchestrator  █████░░░░░░░░░░░░░░░   8/30    two proven defects fixed, tested and merged
-  2 Builder + CI  ████████████░░░░░░░░  15/25    ◂ here: runners boot from a baked image and scale from zero on their own
-  3 Journal loop  ████░░░░░░░░░░░░░░░░   3.5/20  findings projected from issues; the agent reads its history first
-  4 Harness       █░░░░░░░░░░░░░░░░░░░   1/15    proposed; its conformance tests are merged
+  2 Builder + CI  ██████████████░░░░░░  17/25    ◂ here: runners boot from a baked image and scale from zero on their own
+  3 Journal loop  ██████░░░░░░░░░░░░░░   6/20    findings projected from issues; the agent reads its history first
+  4 DDI harness   ███████████████░░░░░  11/15    built, open source, gating its own pushes; factory wiring next
 ```
 
 The overall roadmap, scored against the whole playbook (a separate measure from the MVP score above):
@@ -138,11 +138,11 @@ After the MVP come the factory runs in order (FinOps, MLOps, Agentic SecOps, the
 
 Since Nov 11: rulesets protect eight of the factory's repositories, two repositories require only the Gates verdict, Dependabot auto-merge is on, and the orchestrator's two fault-injection defects are fixed and merged. The CRAP gate also blocked a real regression in an agent-written fix before merge, the first time it caught one outside a test fixture.
 
-Since then, the critical finding from that week is fixed: both affected repositories repinned to the guardrail, so auto-merge refuses a dependency manifest that arrives without its lockfile. The CI runners now boot from a baked image and scale from zero on their own, sized from the job queue, with an alert when a job waits too long or the scaler goes quiet. On Nov 17 the pool emptied itself and came back when work arrived, with no one resizing it. One board workflow for all work, development and CAPA alike, and the CAPA projector are merged. A Features Map per repository, generated from its code, its gates and its findings, with a gate that fails when the map no longer matches the code, is in review; one Features Map sheet carries every repository's features, the board, the MVP phases and the roadmap above, synced daily.
+Since then, the critical finding from that week is fixed: both affected repositories repinned to the guardrail, so auto-merge refuses a dependency manifest that arrives without its lockfile. The CI runners now boot from a baked image and scale from zero on their own, sized from the job queue, with an alert when a job waits too long or the scaler goes quiet. On Nov 17 the pool emptied itself and came back when work arrived, with no one resizing it. One board workflow for all work, development and CAPA alike, and the CAPA projector are merged. The gate for a Features Map per repository, generated from its code, its gates and its findings and failing when the map no longer matches the code, is merged, and the per-repository maps come next; one Features Map sheet carries every repository's features, the board, the MVP phases and the roadmap above, synced daily.
 
 One thing went the other way, and it was caught within the hour. The change that brought the scaler also rewrote a cloud trust condition, and an operator-precedence slip left the owner and repository pins on only one of its three CI identities; the two it left unpinned included the one that applies infrastructure. It was live for about 51 minutes before the agent read it in my apply output. The fix, a check I now run on every identity plan before applying it, and the journal entry (critical, fixed, with what is still unproven stated) all landed the same day.
 
-Next, in order: the agents open pull requests as their own GitHub App (its signing identity is merged; the workflow is next), because my review is the loop's bottleneck; the orchestrator carrying one ticket end to end; the Builder; then the first dry run of one ticket through the loop.
+Next, in order: the agents open pull requests as their own GitHub App (its signing identity is applied and the workflow merged; the callers and the first App-authored pull request are next), because my review is the loop's bottleneck; the agent's own session hooked into the factory, so its prompts pass through the pipeline; the orchestrator's AWS adapters and deploy, the event bus, the CI webhook and a run record per attempt; the Builder on a stub model; then the first dry run of one ticket through the loop, from a spec I write.
 
 ## 📘 The Playbook
 
