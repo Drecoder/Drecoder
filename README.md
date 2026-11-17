@@ -109,8 +109,8 @@ Where the MVP stands (re-scored Nov 17), from what is merged and running:
 
 ```text
 MVP
-  now         ███████████████████████████░░░░░░░░░░░░░  ~68   (was ~63 on Nov 16)
-  1st dry run █████████████████████████████░░░░░░░░░░░  ~73
+  now         ███████████████████████████████░░░░░░░░░  ~78   (was ~63 on Nov 16)
+  1st dry run █████████████████████████████░░░░░░░░░░░  ~73   ◂ score passed; the run itself waits on Phase 1
   MVP         ████████████████████████████████████████  100
 
 PHASES
@@ -118,7 +118,7 @@ PHASES
   1 Orchestrator  █████░░░░░░░░░░░░░░░   8/30    two proven defects fixed, tested and merged
   2 Builder + CI  ██████████████░░░░░░  17/25    ◂ here: runners boot from a baked image and scale from zero on their own
   3 Journal loop  ██████░░░░░░░░░░░░░░   6/20    findings projected from issues; the agent reads its history first
-  4 Harness       █░░░░░░░░░░░░░░░░░░░   1/15    proposed; its conformance tests are merged
+  4 DDI harness   ███████████████░░░░░  11/15    built, open source, gating its own pushes; factory wiring next
 ```
 
 The overall roadmap, scored against the whole playbook (a separate measure from the MVP score above):
