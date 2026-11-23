@@ -105,20 +105,20 @@ Progress is scored from evidence against the playbook. Baseline 61 (Oct 28); the
 
 ![One board workflow for all work, mirrored by the Features Map](images/board-workflow.svg)
 
-Where the MVP stands (re-scored Nov 17), from what is merged and running:
+Where the MVP stands (last re-scored Nov 17; no re-grade since), from what is merged and running. Every bar is on the same 0–100 scale; each phase shows the share of its own points:
 
 ```text
-MVP
-  now         ███████████████████████████████░░░░░░░░░  ~78   (was ~63 on Nov 16)
-  1st dry run █████████████████████████████░░░░░░░░░░░  ~73   ◂ score passed; the run itself waits on Phase 1
+MVP (0–100)
+  now         ███████████████████████████████░░░░░░░░░   78  (an estimate; no written rubric yet)
+  1st dry run █████████████████████████████░░░░░░░░░░░   73  ◂ score passed; the run itself (KAN-59) waits on Phase 1
   MVP         ████████████████████████████████████████  100
 
-PHASES
-  0 Unblock       ██████████████████░░   9/10    rulesets on eight repositories; the agents' GitHub App: key in KMS, identity applied, workflow merged; first App PR next
-  1 Orchestrator  █████░░░░░░░░░░░░░░░   8/30    two proven defects fixed, tested and merged
-  2 Builder + CI  ██████████████░░░░░░  17/25    ◂ here: runners boot from a baked image and scale from zero on their own
-  3 Journal loop  ██████░░░░░░░░░░░░░░   6/20    findings projected from issues; the agent reads its history first
-  4 DDI harness   ███████████████░░░░░  11/15    built, open source, gating its own pushes; factory wiring next
+PHASES (0–100)
+  0 Unblock       ████████████████████████████████████░░░░   90   9/10  App, key in KMS, callers in 11 repos; the first App PR waits on two settings of mine
+  1 Orchestrator  ███████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   27   8/30  fenced lease on main; event bus, webhook and run records next
+  2 Builder + CI  ███████████████████████████░░░░░░░░░░░░░   68  17/25  gates, Policy Engine, mutation, a runner pool that scales from zero
+  3 Journal loop  ████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░   30   6/20  findings projected from issues; the agent reads its history first
+  4 DDI harness   █████████████████████████████░░░░░░░░░░░   73  11/15  built, open source, gating its own pushes; factory wiring next
 ```
 
 The overall roadmap, scored against the whole playbook (a separate measure from the MVP score above):
@@ -134,6 +134,17 @@ PLAYBOOK SCORE (0–100)
   PI-4 Scale        █████████████████████████████████████░░░  ≥93  autonomy promoted per class on evidence
 ```
 
+How far each roadmap stage is, as the share of its tickets Done (0–100, from the Features Map, Nov 23):
+
+```text
+ROADMAP PROGRESS (0–100)
+  PI-1 PoC         ████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   20  1 of 5 tickets Done
+  PI-2 Pilot       ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0  0 of 5; the agents' GitHub App is the first
+  PI-3 Production  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0  0 of 8; Genesis is still red
+  PI-4 Scale       ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0  0 of 1
+  Runs 1–4         ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0  start after the MVP
+```
+
 After the MVP come the factory runs in order (FinOps, MLOps, Agentic SecOps, the pentest platform), each one starting only when the run before it reaches its MVP.
 
 Since Nov 11: rulesets protect eight of the factory's repositories, two repositories require only the Gates verdict, Dependabot auto-merge is on, and the orchestrator's two fault-injection defects are fixed and merged. The CRAP gate also blocked a real regression in an agent-written fix before merge, the first time it caught one outside a test fixture.
@@ -142,7 +153,9 @@ Since then, the critical finding from that week is fixed: both affected reposito
 
 One thing went the other way, and it was caught within the hour. The change that brought the scaler also rewrote a cloud trust condition, and an operator-precedence slip left the owner and repository pins on only one of its three CI identities; the two it left unpinned included the one that applies infrastructure. It was live for about 51 minutes before the agent read it in my apply output. The fix, a check I now run on every identity plan before applying it, and the journal entry (critical, fixed, with what is still unproven stated) all landed the same day.
 
-Next, in order: the agents open pull requests as their own GitHub App (its signing identity is applied and the workflow merged; the callers and the first App-authored pull request are next), because my review is the loop's bottleneck; the agent's own session hooked into the factory, so its prompts pass through the pipeline; the orchestrator's AWS adapters and deploy, the event bus, the CI webhook and a run record per attempt; the Builder on a stub model; then the first dry run of one ticket through the loop, from a spec I write.
+Nov 18 to 23: the workflow that opens agent pull requests as the GitHub App is now called from 11 repositories. The first App-authored pull request has not opened: one repository refuses the sign-in action until I allow it, and Cloud KMS refused the signature in the other. Both wait on me. The MVP is now one epic (KAN-59) with a written definition of done: a twelve-step run of a stub Builder from pickup to my merge. One outage went unnoticed for three days: from Nov 20 to Nov 23 GitHub refused every private-repository job over a billing problem, so the runner scaler failed about 550 times in a row and nothing alerted. Billing is fixed and the scaler is green again; the missing alert is the next finding.
+
+Next, in order: the agents open pull requests as their own GitHub App (the workflow is in 11 repositories; the first App-authored pull request waits on an allowed action and a KMS permission), because my review is the loop's bottleneck; the agent's own session hooked into the factory, so its prompts pass through the pipeline; the orchestrator's AWS adapters and deploy, the event bus, the CI webhook and a run record per attempt; the Builder on a stub model; then the first dry run of one ticket through the loop, from a spec I write.
 
 ## 📘 The Playbook
 
