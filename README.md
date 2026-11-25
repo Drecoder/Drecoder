@@ -6,7 +6,7 @@ I'm building a software factory: AI agents that turn an approved requirement int
 
 The rule I hold myself to: a standard counts only when it is enforced and running, not when it is written down.
 
-📓 **[Proof journal](https://github.com/Drecoder/Engineering_Excellence_Playbook/blob/main/docs/POC_JOURNAL.md):** what applying the playbook actually found while building the factory, each finding written up as a CAPA post-mortem (problem, root cause, correction, preventive action, verification), including the ones still open. CI enforces append-only on every pull request, on `main`, and daily. Since Nov 16, every finding starts as a tracked issue whose number is its ID, and the journal and register are projected from those issues by a projector, never written by hand (its check in CI is in review). Before the agent diagnoses any work, it reads the findings that apply to it and commits what it learned; CI refuses a change whose record leaves one out. A CAPA register ranks every finding by severity with a mandatory deadline (critical 7 days, high 30, medium 90, low 180), measures how many controls are proven to fail on their defect, and keeps production readiness false while any critical or high security or governance finding is open.
+📓 **[Proof journal](https://github.com/Drecoder/Engineering_Excellence_Playbook/blob/main/docs/POC_JOURNAL.md):** what applying the playbook actually found while building the factory, each finding written up as a CAPA post-mortem (problem, root cause, correction, preventive action, verification), including the ones still open. CI enforces append-only on every pull request, on `main`, and daily. Since Nov 16, every finding starts as a tracked issue whose number is its ID, and the journal and register are projected from those issues by a projector, never written by hand (the projector is merged). Before the agent diagnoses any work, it reads the findings that apply to it and commits what it learned; CI refuses a change whose record leaves one out. A CAPA register ranks every finding by severity with a mandatory deadline (critical 7 days, high 30, medium 90, low 180), measures how many controls are proven to fail on their defect, and keeps production readiness false while any critical or high security or governance finding is open.
 
 🧰 **[agent-ddi-harness](https://github.com/Drecoder/agent-ddi-harness)** (open source, MIT): a local-first DDI/EEP pre-push harness for agents and CLI workflows. One loop runs on every `git push`: it scopes the change, ranks the playbook-style rules that apply, enforces the machine-checkable ones, runs CRAP, then mutation, then the TDD pyramid on the exact pushed commit, and turns every failure into a structured CAPA or merge-conflict draft. Everything it writes stays an unverified claim until CI signs the result. Python and git only, no cloud and no keys; it gates its own pushes. A reference implementation of Domain-Driven Intelligence (DDI): DDD, TDD, and event-, error- and evidence-driven development governing how agents work.
 
@@ -16,7 +16,7 @@ The rule I hold myself to: a standard counts only when it is enforced and runnin
 
 The factory separates the ability to reason about, propose, and build a change from the authority to evaluate, approve, and execute it.
 
-- **Agentic plane (AWS):** the orchestrator, the Builder and its models, retrieval, and the event bus. It proposes and builds.
+- **Agentic plane (AWS):** the orchestrator, the Builder and its models, retrieval, and the event bus. It proposes and builds. Rubik organizes that retrieval around four graphs: **temporal** (handoffs and roadmap), **structural** (repositories and revisions), **corrective** (CAPA findings), and **normative** (playbook rules and contracts). The retrieval engine has been exercised directly with selected sources and provenance. Automatic retrieval in the private harness before model invocation still needs independent verification.
 - **Execution plane (GCP):** central CI, the Policy Engine, the compliance authority, infrastructure apply, and the services. It evaluates, certifies, and ships.
 - **GitHub is the seam.** Agents hold no identity in the execution plane; they reach it only by opening a pull request. Required checks, CODEOWNERS, and protected branches decide what gets through, and I approve every merge.
 - **Agents produce claims, never evidence.** Only results signed by CI's identity count as evidence. Anything an agent reports about its own work stays a claim.
@@ -29,7 +29,7 @@ At a glance it is a software factory. Underneath, every loop produces measured e
 | --- | --- | --- |
 | Quality: CRAP, then mutation, decided by the Policy Engine | ✅ | ✅ in the central CI; repositories moving onto it |
 | A skipped gate is never a pass: the Gates verdict | ✅ | ✅ required by two repositories; the rest follow |
-| Build, CI, fix: the Builder's loop | ✅ | ⏳ first dry run next |
+| Build, CI, fix: the Builder's loop | ✅ | ⏳ intake and staging verified in CI. Runtime egress and fenced delivery are open before the first dry run |
 | Autonomy by evidence: promote and demote on measurements | ✅ | ⏳ the evidence loop for auto-merged updates is next |
 | Cost into budgets as gates (FinOps) | ✅ proposed | Run 1 |
 | CAPA intake: a failing control opens its own finding | ✅ | ⏳ findings are tracked issues, projected into the journal; detectors next |
@@ -73,7 +73,7 @@ Not a bigger factory: a smaller one that is complete and independently verifiabl
 
 **P0: Prove the trust boundaries**
 
-- Rulesets and required checks on every factory repository, with no bypass. Rulesets now protect eight of the factory's repositories, with the required checks bound to GitHub Actions (INC-001 fixed, not yet proven: a refused direct push is still to be shown). A required approving review waits until the agents act under their own GitHub App identities.
+- Rulesets and required checks on every factory repository, with no bypass. Rulesets now protect eight of the factory's repositories, with the required checks bound to GitHub Actions (INC-001 fixed, not yet proven: a refused direct push is still to be shown). The GitHub App now opens agent pull requests in participating repositories. Required approving reviews still need to be confirmed repository by repository.
 - Agents hold no execution-plane identity and cannot change the checks that evaluate them.
 - Compliance decisions bound to the exact commit, CI run, image digest, and policy version.
 - Tampered, expired, mis-scoped, and replayed release tokens rejected; a token consumed exactly once, even under concurrent requests; deploys fail closed when the verifier is down.
@@ -83,7 +83,7 @@ Not a bigger factory: a smaller one that is complete and independently verifiabl
 **P0: Complete one release lifecycle**
 
 - One change from approved spec through the Builder, the central gate with its acceptance tests and Policy Engine, a human-approved merge, signed provenance and an SBOM, the compliance decision, and deployment admission.
-- The Policy Engine's decision core was built and merged ahead of the loop, so the Builder's first real ticket is another service. The agents then take Genesis, whose gate is red today, to green.
+- The Policy Engine's decision core was built and merged ahead of the loop, so the Builder's first real ticket is another service. Genesis still has an open pull request for its first run on the real gates.
 - **Exit:** a reproducible run with a verified artifact, an auditable decision, and a deploy, with no other way to release.
 
 **P1: Demonstrate the economics**
@@ -153,9 +153,9 @@ Since then, the critical finding from that week is fixed: both affected reposito
 
 One thing went the other way, and it was caught within the hour. The change that brought the scaler also rewrote a cloud trust condition, and an operator-precedence slip left the owner and repository pins on only one of its three CI identities; the two it left unpinned included the one that applies infrastructure. It was live for about 51 minutes before the agent read it in my apply output. The fix, a check I now run on every identity plan before applying it, and the journal entry (critical, fixed, with what is still unproven stated) all landed the same day.
 
-Nov 18 to 23: the workflow that opens agent pull requests as the GitHub App is now called from 11 repositories. The first App-authored pull request has not opened: one repository refuses the sign-in action until I allow it, and Cloud KMS refused the signature in the other. Both wait on me. The MVP is now one epic (KAN-59) with a written definition of done: a twelve-step run of a stub Builder from pickup to my merge. One outage went unnoticed for three days: from Nov 20 to Nov 23 GitHub refused every private-repository job over a billing problem, so the runner scaler failed about 550 times in a row and nothing alerted. Billing is fixed and the scaler is green again; the missing alert is the next finding.
+As of Nov 24, the GitHub App opens pull requests with agent attribution. It opened the shared specs handoff and the central CI Python policy change. The KMS signing issue is resolved, while the action allowlist ticket remains with me. The MVP is now one epic (KAN-59) with a written definition of done: a twelve-step run of a stub Builder from pickup to my merge. One outage went unnoticed for three days: from Nov 20 to Nov 23 GitHub refused every private-repository job over a billing problem, so the runner scaler failed about 550 times in a row and nothing alerted. Billing is fixed and the scaler is green again; the missing alert is the next finding.
 
-Next, in order: the agents open pull requests as their own GitHub App (the workflow is in 11 repositories; the first App-authored pull request waits on an allowed action and a KMS permission), because my review is the loop's bottleneck; the agent's own session hooked into the factory, so its prompts pass through the pipeline; the orchestrator's AWS adapters and deploy, the event bus, the CI webhook and a run record per attempt; the Builder on a stub model; then the first dry run of one ticket through the loop, from a spec I write.
+Next on the path to the dry run: the orchestrator's AWS adapters and deploy, the event bus, the CI webhook and a run record per attempt. The private harness has a merged pre-model hook. The changed-module Python gate still needs independent verification before I can count live Rubik integration or resume the Builder's runtime egress work. The first ticket through the full loop is still ahead.
 
 ## 📘 The Playbook
 
@@ -174,10 +174,10 @@ Each repository is a bench with one job. The playbook is public; the benches are
 
 | Bench | Plane | Job | Status |
 | :--- | :--- | :--- | :--- |
-| Central CI | Execution | One reusable gate that every repository calls | Running |
+| Central CI | Execution | One reusable gate for participating repositories | Running |
 | Policy Engine | Execution | Decides PASS, BLOCK, or QUARANTINE from normalized quality metrics, with no network and no model | Running in the central gate: CRAP from ESLint complexity and coverage, measured on the change and its merge base |
 | Orchestrator | Agentic | Leases one approved Jira ticket at a time, hands it to the Builder, and reads the CI result; the only writer to the board | Fenced lease, telemetry, and a deployable image on `main` (built, tested inside its container, and scanned in CI); its two fault-injection defects fixed (re-dispatch is bounded, and a stale attempt can no longer push). Its Jira, DynamoDB, and GitHub adapters and the AWS deploy come next |
-| Builder | Agentic | A Strands agent on open-weight gpt-oss-20b, on spot capacity that scales to zero; gpt-oss-120b on Bedrock for harder tickets | Pull-request wrapper built; open-weight Builder designed |
+| Builder | Agentic | A Strands agent on open-weight gpt-oss-20b, on spot capacity that scales to zero; gpt-oss-120b on Bedrock for harder tickets | Canonical intake and deterministic local staging merged and passed independent CI. Runtime egress controls and fenced delivery are open. The open-weight Builder is designed |
 | Event bus | Agentic | SNS and SQS with claim checks, an outbox, and dead-letter queues | Designed; part of the MVP |
 | rig | Agentic | Measures: architecture checks, features, the symbol index | Built |
 | Notepad | Agentic | Working memory: a sealed, hash-chained record of every task | Library on local backends |
@@ -190,7 +190,7 @@ No model provider checks its own output: the model that writes a change and the 
 
 ## ✅ Running Today
 
-- One central CI gate, called by commit SHA from every repository: secret scanning, Trivy, Semgrep, and per-stack lint, type checks, tests, coverage floors, and license policy. One severity rule for every scanner: CRITICAL or CISA KEV blocks, and the gate fails closed.
+- One central CI gate, called by commit SHA from participating repositories: secret scanning, Trivy, Semgrep, and per-stack lint, type checks, tests, coverage floors, and license policy. One severity rule for every scanner: CRITICAL or CISA KEV blocks, and the gate fails closed.
 - The gate tests itself. Fixture projects run the real gate on every change to it, and each check is shown to fail on the defect it guards against before it counts.
 - A skipped job is not a pass, enforced: one Gates verdict check works out which gates had to run for the repository and fails unless every one succeeded, so each repository requires a single check.
 - Code quality in the gate: CRAP scoring first, then mutation testing with Stryker, decided by the Policy Engine. New functions need CRAP ≤ 15 and 80% coverage; nothing may get worse than its baseline.
@@ -203,7 +203,7 @@ No model provider checks its own output: the model that writes a change and the 
 
 ## 🔜 Now
 
-**Unclog the human in the loop.** I review and approve every merge, so anything that slows my part goes first: the agents open pull requests as their own GitHub App (its key held non-exportable in Cloud KMS), every repository requires the one Gates verdict, and CI runners boot from a baked image and scale from zero only when work is queued (running since Nov 17).
+**Unclog the human in the loop.** I review and approve every merge, so anything that slows my part goes first: the GitHub App opens agent pull requests where the caller is enabled (its key is held non-exportable in Cloud KMS), work continues to require the Gates verdict across the repositories, and CI runners boot from a baked image and scale from zero only when work is queued (running since Nov 17).
 
 Then the CAPA journal runs itself: a failed gate, a red check on `main`, a Policy Engine block or a job queued too long opens its own finding, and the journal is projected from the findings in one batched change I approve. The projector is merged and the agent reads its own findings before it diagnoses; the first detector follows.
 
